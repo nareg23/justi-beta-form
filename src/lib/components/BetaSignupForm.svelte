@@ -9,10 +9,13 @@
 	import { cn } from '$lib/utils';
 	import Button from './ui/button/button.svelte';
 	import { ArrowRight } from 'lucide-svelte';
+	import { m } from '$lib/paraglide/messages';
+	import { getLocale } from '$lib/paraglide/runtime';
+	import NdaDialog from './nda-dialog.svelte';
+
 	interface Props {
 		form: any;
 		formData: any;
-		showNdaModal: any;
 		enhance: any;
 		locationsAndSpecializations: {
 			locations: {
@@ -23,13 +26,7 @@
 		};
 	}
 
-	let {
-		form,
-		formData,
-		showNdaModal = $bindable(),
-		enhance,
-		locationsAndSpecializations
-	}: Props = $props();
+	let { form, formData, enhance, locationsAndSpecializations }: Props = $props();
 
 	const {
 		locations: { cities, provinces },
@@ -41,12 +38,23 @@
 	const labelClasses = 'text-sm font-medium text-gray-700 mb-1.5';
 	const descriptionClasses = 'mt-1.5 text-sm text-gray-500';
 
+	const isEnglish = getLocale() === 'en';
+	let showNdaModal = $state(false);
+
 	const triggeredSpecializations = $derived.by(() => {
 		if ($formData?.specializations?.length === 0) {
 			return [];
 		}
+
+		const other = {
+			id: 'other',
+			label: 'Other',
+			fr_label: 'Autre',
+			value: 'other'
+		};
+
 		return $formData.specializations?.map((specialization: string) => {
-			return specializations.find((s) => s.value === specialization);
+			return [...specializations, other].find((s) => s.value === specialization);
 		});
 	});
 	const triggeredProvince = $derived.by(() => {
@@ -56,6 +64,7 @@
 		return {
 			id: '',
 			label: 'Select your province',
+			fr_label: 'Sélectionnez votre province',
 			value: ''
 		};
 	});
@@ -69,8 +78,18 @@
 		}
 		return {
 			label: 'Select your city',
-			value: ''
+			fr_label: 'Sélectionnez votre ville',
+			value: '',
+			id: ''
 		};
+	});
+
+	const otherSpecialization = $derived.by(() => {
+		return (
+			!!triggeredSpecializations?.find(
+				(s: Props['locationsAndSpecializations']['specializations'][0]) => s.value === 'other'
+			) || false
+		);
 	});
 </script>
 
@@ -79,24 +98,30 @@
 	<div class="space-y-8">
 		<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
 			<UserCircle class="text-primary h-6 w-6" />
-			<h2 class="text-2xl font-semibold">Personal Information</h2>
+			<h2 class="text-2xl font-semibold">{m['form.sections.personal.title']()}</h2>
 		</div>
 		<div class="grid gap-8 md:grid-cols-2">
 			<Form.Field {form} name="firstName">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>First Name</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.personal.firstName.label']()}</Form.Label
+						>
 						<Input {...props} class={inputClasses} bind:value={$formData.firstName} />
 					{/snippet}
 				</Form.Control>
-				<Form.Description class={descriptionClasses}>Used for your public profile</Form.Description>
+				<Form.Description class={descriptionClasses}
+					>{m['form.sections.personal.firstName.description']()}</Form.Description
+				>
 				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 			</Form.Field>
 
 			<Form.Field {form} name="lastName">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Last Name</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.personal.lastName.label']()}</Form.Label
+						>
 						<Input {...props} class={inputClasses} bind:value={$formData.lastName} />
 					{/snippet}
 				</Form.Control>
@@ -108,23 +133,27 @@
 			<Form.Field {form} name="email">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Email</Form.Label>
+						<Form.Label class={labelClasses}>{m['form.sections.personal.email.label']()}</Form.Label
+						>
 						<Input type="email" {...props} class={inputClasses} bind:value={$formData.email} />
 					{/snippet}
 				</Form.Control>
-				<Form.Description class={descriptionClasses}>We'll send your invite here</Form.Description>
+				<Form.Description class={descriptionClasses}
+					>{m['form.sections.personal.email.description']()}</Form.Description
+				>
 				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 			</Form.Field>
 
 			<Form.Field {form} name="phone">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Phone</Form.Label>
+						<Form.Label class={labelClasses}>{m['form.sections.personal.phone.label']()}</Form.Label
+						>
 						<Input type="tel" {...props} class={inputClasses} bind:value={$formData.phone} />
 					{/snippet}
 				</Form.Control>
 				<Form.Description class={descriptionClasses}
-					>For identity verification only</Form.Description
+					>{m['form.sections.personal.phone.description']()}</Form.Description
 				>
 				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 			</Form.Field>
@@ -135,13 +164,15 @@
 	<div class="space-y-8">
 		<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
 			<Briefcase class="text-primary h-6 w-6" />
-			<h2 class="text-2xl font-semibold">Professional Information</h2>
+			<h2 class="text-2xl font-semibold">{m['form.sections.professional.title']()}</h2>
 		</div>
 		<div class="grid gap-8 md:grid-cols-2">
 			<Form.Field {form} name="province">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Province</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.professional.province.label']()}</Form.Label
+						>
 						<Select.Root
 							type="single"
 							{...props}
@@ -149,23 +180,34 @@
 							onValueChange={() => ($formData.city = '')}
 						>
 							<Select.Trigger
-								class="focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none"
+								class={cn(
+									'focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
+									{ 'text-sm': !triggeredProvince?.id }
+								)}
 							>
 								{#snippet children()}
-									{triggeredProvince?.label}
+									{#if isEnglish}
+										{triggeredProvince?.label}
+									{:else}
+										{triggeredProvince?.fr_label}
+									{/if}
 								{/snippet}
 							</Select.Trigger>
 							<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
 								<Select.Group>
 									<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-										>Provinces</Select.Label
+										>{m['form.sections.professional.province.label']()}</Select.Label
 									>
 									{#each provinces as province}
 										<Select.Item
 											value={province.value}
 											class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
 										>
-											{province.label}
+											{#if isEnglish}
+												{province.label}
+											{:else}
+												{province.fr_label}
+											{/if}
 										</Select.Item>
 									{/each}
 								</Select.Group>
@@ -179,31 +221,44 @@
 			<Form.Field {form} name="city">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>City</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.professional.city.label']()}</Form.Label
+						>
 						<Select.Root
-							type="single"
 							{...props}
+							type="single"
 							bind:value={$formData.city}
 							disabled={!triggeredProvince?.id}
 						>
 							<Select.Trigger
-								class="focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none"
+								class={cn(
+									'focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
+									{ 'text-sm': !triggeredCity?.id }
+								)}
 							>
 								{#snippet children()}
-									{triggeredCity?.label}
+									{#if isEnglish}
+										{triggeredCity?.label}
+									{:else}
+										{triggeredCity?.fr_label}
+									{/if}
 								{/snippet}
 							</Select.Trigger>
 							<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
 								<Select.Group>
 									<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-										>Cities</Select.Label
+										>{m['form.sections.professional.city.label']()}</Select.Label
 									>
 									{#each cityOptions as city}
 										<Select.Item
 											value={city.value}
 											class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
 										>
-											{city.label}
+											{#if isEnglish}
+												{city.label}
+											{:else}
+												{city.fr_label}
+											{/if}
 										</Select.Item>
 									{/each}
 								</Select.Group>
@@ -212,7 +267,7 @@
 					{/snippet}
 				</Form.Control>
 				<Form.Description class={descriptionClasses}
-					>Your primary practice location</Form.Description
+					>{m['form.sections.professional.city.description']()}</Form.Description
 				>
 				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 			</Form.Field>
@@ -222,13 +277,13 @@
 			<Form.Control>
 				{#snippet children({ props })}
 					<Form.Label class={labelClasses}>
-						Areas of Practice <span class="text-xs text-gray-500">(max 3)</span>
+						{m['form.sections.professional.specializations.label']()}
 					</Form.Label>
-					<Select.Root type="multiple" {...props} bind:value={$formData.specializations}>
+					<Select.Root {...props} type="multiple" bind:value={$formData.specializations}>
 						<Select.Trigger
 							class={cn(
-								'focus:border-primary focus:ring-primary/20 flex  !h-auto min-h-[3.25rem] w-full flex-wrap items-center  gap-1.5 rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
-								$formData.specializations.length > 0 ? 'justify-start' : 'justify-center'
+								'focus:border-primary focus:ring-primary/20 flex !h-auto min-h-[3.25rem] w-full flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
+								$formData.specializations?.length > 0 ? 'justify-start' : 'justify-center'
 							)}
 						>
 							{#snippet children()}
@@ -236,7 +291,11 @@
 									<Badge
 										class="bg-primary/10 text-primary hover:bg-primary/15 px-2 py-1 text-sm font-medium transition-colors"
 									>
-										{specialization.label}
+										{#if isEnglish}
+											{specialization.label}
+										{:else}
+											{specialization.fr_label}
+										{/if}
 										<button
 											type="button"
 											class="focus-visible:outline-ring/70 text-primary/70 hover:bg-primary/20 hover:text-primary -my-px -ms-px -me-1 ml-1.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full p-0 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -250,7 +309,9 @@
 										</button>
 									</Badge>
 								{:else}
-									<span class="text-gray-500 text-sm">Select your practice areas</span>
+									<span class="text-gray-500 text-sm"
+										>{m['form.sections.professional.specializations.placeholder']()}</span
+									>
 								{/each}
 							{/snippet}
 						</Select.Trigger>
@@ -259,30 +320,67 @@
 						>
 							<Select.Group class="space-y-1 p-1">
 								<Select.Label class="px-2 py-1.5 text-sm font-medium text-gray-500"
-									>Practice Areas</Select.Label
+									>{m['form.sections.professional.specializations.label']()}</Select.Label
 								>
 								{#each specializations as specialization}
 									<Select.Item
 										value={specialization.value}
 										class="hover:bg-primary/5 focus:bg-primary/5 data-selected:bg-primary/10 data-selected:text-primary relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
 									>
-										{specialization.label}
+										{#if isEnglish}
+											{specialization.label}
+										{:else}
+											{specialization.fr_label}
+										{/if}
 									</Select.Item>
 								{/each}
+								<Select.Item
+									value="other"
+									class="hover:bg-primary/5 focus:bg-primary/5 data-selected:bg-primary/10 data-selected:text-primary relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+								>
+									{#if isEnglish}
+										Other
+									{:else}
+										Autre
+									{/if}
+								</Select.Item>
 							</Select.Group>
 						</Select.Content>
 					</Select.Root>
 				{/snippet}
 			</Form.Control>
-			<Form.Description class={descriptionClasses}>Select all that apply</Form.Description>
+			<Form.Description class={descriptionClasses}
+				>{m['form.sections.professional.specializations.description']()}</Form.Description
+			>
 			<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 		</Form.Field>
+
+		{#if otherSpecialization}
+			<Form.Field {form} name="otherSpecialization">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}
+							>{m['form.sections.professional.otherSpecialization.label']()}</Form.Label
+						>
+						<Input
+							{...props}
+							class={inputClasses}
+							bind:value={$formData.otherSpecialization}
+							placeholder={m['form.sections.professional.otherSpecialization.placeholder']()}
+						/>
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
+			</Form.Field>
+		{/if}
 
 		<div class="grid gap-8 md:grid-cols-2">
 			<Form.Field {form} name="yearsPractice">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Years of Practice</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.professional.yearsPractice.label']()}</Form.Label
+						>
 						<Input
 							type="number"
 							min="0"
@@ -299,11 +397,15 @@
 			<Form.Field {form} name="firmName">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}>Firm Name</Form.Label>
+						<Form.Label class={labelClasses}
+							>{m['form.sections.professional.firmName.label']()}</Form.Label
+						>
 						<Input {...props} class={inputClasses} bind:value={$formData.firmName} />
 					{/snippet}
 				</Form.Control>
-				<Form.Description class={descriptionClasses}>Optional</Form.Description>
+				<Form.Description class={descriptionClasses}
+					>{m['form.sections.professional.firmName.description']()}</Form.Description
+				>
 				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 			</Form.Field>
 		</div>
@@ -311,12 +413,14 @@
 		<Form.Field {form} name="website">
 			<Form.Control>
 				{#snippet children({ props })}
-					<Form.Label class={labelClasses}>Website</Form.Label>
+					<Form.Label class={labelClasses}
+						>{m['form.sections.professional.website.label']()}</Form.Label
+					>
 					<Input type="url" {...props} class={inputClasses} bind:value={$formData.website} />
 				{/snippet}
 			</Form.Control>
 			<Form.Description class={descriptionClasses}
-				>Optional - must start with https://</Form.Description
+				>{m['form.sections.professional.website.description']()}</Form.Description
 			>
 			<Form.FieldErrors class="mt-2 text-sm text-red-500" />
 		</Form.Field>
@@ -326,29 +430,41 @@
 	<div class="space-y-8">
 		<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
 			<Info class="text-primary h-6 w-6" />
-			<h2 class="text-2xl font-semibold">Additional Information</h2>
+			<h2 class="text-2xl font-semibold">{m['form.sections.additional.title']()}</h2>
 		</div>
 		<Form.Field {form} name="referralSource">
 			<Form.Control>
 				{#snippet children({ props })}
-					<Form.Label class={labelClasses}>How did you hear about us?</Form.Label>
+					<Form.Label class={labelClasses}
+						>{m['form.sections.additional.referralSource.label']()}</Form.Label
+					>
 					<Select.Root type="single" {...props} bind:value={$formData.referralSource}>
 						<Select.Trigger
 							class="focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none"
 						>
-							{$formData.referralSource}
+							{#if isEnglish}
+								{referralSources.find((source) => source.value === $formData.referralSource)?.label}
+							{:else}
+								{referralSources.find((source) => source.value === $formData.referralSource)
+									?.fr_label}
+							{/if}
 						</Select.Trigger>
 						<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
 							<Select.Group>
 								<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-									>Referral Source</Select.Label
+									>{m['form.sections.additional.referralSource.label']()}</Select.Label
 								>
 								{#each referralSources as source}
 									<Select.Item
-										value={source}
+										value={source.value}
 										class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
-										>{source}</Select.Item
 									>
+										{#if isEnglish}
+											{source.label}
+										{:else}
+											{source.fr_label}
+										{/if}
+									</Select.Item>
 								{/each}
 							</Select.Group>
 						</Select.Content>
@@ -364,19 +480,19 @@
 					{#snippet children({ props })}
 						<div class="flex items-center gap-3">
 							<input
-								type="checkbox"
 								{...props}
+								type="checkbox"
 								class="text-primary focus:ring-primary/20 h-5 w-5 rounded border-gray-300"
-								checked={$formData.agreeBeta}
-								oninput={(e) => ($formData.agreeBeta = true)}
+								bind:checked={$formData.agreeBeta}
 								required
 							/>
-							<span
+							<button
+								type="button"
 								class="text-primary hover:text-primary/80 cursor-pointer text-base font-medium underline decoration-2 underline-offset-2"
 								onclick={() => (showNdaModal = true)}
 							>
-								I accept the NDA & Beta Terms
-							</span>
+								{m['form.sections.additional.agreeBeta.label']()}
+							</button>
 						</div>
 					{/snippet}
 				</Form.Control>
@@ -402,7 +518,7 @@
 			'flex items-center justify-center gap-3'
 		)}
 	>
-		<span class="relative z-10">Submit Application</span>
+		<span class="relative z-10">{m['form.submit']()}</span>
 		<ArrowRight
 			class={cn(
 				'relative z-10 h-5 w-5',
@@ -413,35 +529,7 @@
 	</Button>
 </form>
 
-<div class="mt-8 flex items-center justify-between text-sm text-gray-400">
-	<p>© {new Date().getFullYear()} JustiConnect. All rights reserved.</p>
-	<div class="flex items-center gap-1.5">Made with 🍁 in Canada</div>
-</div>
-
-{#if showNdaModal}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
-		role="dialog"
-		aria-modal="true"
-	>
-		<div class="relative w-full max-w-2xl rounded-2xl bg-white p-8 shadow-2xl">
-			<button
-				class="absolute top-4 right-4 text-gray-400 transition-colors duration-200 hover:text-black"
-				onclick={() => (showNdaModal = false)}
-				aria-label="Close">✕</button
-			>
-			<h2 class="text-primary mb-6 text-2xl font-bold">NDA & Beta Terms</h2>
-			<div class="prose prose-sm max-h-[60vh] overflow-y-auto">
-				<p>
-					By participating in the JustiConnect Beta Program, you agree to maintain the
-					confidentiality of all information shared during the beta testing period...
-				</p>
-				<!-- Add more terms content here -->
-			</div>
-			<button
-				class="bg-primary text-primary-foreground shadow-glow hover:bg-primary-strong transition-smooth mt-6 w-full rounded-xl py-3 font-semibold hover:translate-y-[-1px] hover:shadow-xl"
-				onclick={() => (showNdaModal = false)}>Close</button
-			>
-		</div>
-	</div>
-{/if}
+<NdaDialog
+	bind:showNdaModal
+	handleClick={() => ((showNdaModal = false), ($formData.agreeBeta = true), console.log($formData))}
+/>

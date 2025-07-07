@@ -14,7 +14,7 @@ const fetchSpecializations = async () => {
 		if (error) {
 			console.error(error);
 		}
-		return data;
+		return data ?? [];
 	} catch (error) {
 		console.error(error);
 		return [];
@@ -28,8 +28,8 @@ const fetchLocations = async () => {
 			console.error(error);
 		}
 		return {
-			cities: data?.filter((item) => item.parent_id !== null),
-			provinces: data?.filter((item) => item.parent_id === null)
+			cities: data?.filter((item) => item.parent_id !== null) ?? [],
+			provinces: data?.filter((item) => item.parent_id === null) ?? []
 		};
 	} catch (error) {
 		console.error(error);

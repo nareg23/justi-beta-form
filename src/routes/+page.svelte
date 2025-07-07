@@ -6,6 +6,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import BetaSignupForm from '$lib/components/BetaSignupForm.svelte';
 	import LOGO from '$lib/assets/LOGO-PRO-ON-WHITE.svg';
+	import { getLocale, setLocale } from '$lib/paraglide/runtime.js';
 	import {
 		CalendarCheck,
 		Clock,
@@ -37,18 +38,16 @@
 	});
 	const { form: formData, enhance } = form;
 
-	const referralSources = ['Google', 'LinkedIn', 'Colleague', 'Event', 'Other'];
-
-	let showNdaModal = $state(false);
+	type FeatureColor = 'schedule' | 'client' | 'profile' | 'availability';
 
 	const features = [
 		{
 			title: m['features.cards.schedule.title'],
 			description: m['features.cards.schedule.description'],
 			img: '/images/calendar-schedule.png',
-			color: 'confirmed',
+			color: 'schedule' as FeatureColor,
 			Icon: CalendarCheck,
-			tag: 'Smart Scheduling',
+			tag: m['features.cards.schedule.tag'],
 			points: [
 				{ Icon: CalendarCheck, text: m['features.cards.schedule.one'] },
 				{ Icon: Clock, text: m['features.cards.schedule.two'] },
@@ -59,9 +58,9 @@
 			title: m['features.cards.client.title'],
 			description: m['features.cards.client.description'],
 			img: '/images/clients.png',
-			color: 'secondary',
+			color: 'client' as FeatureColor,
 			Icon: Users,
-			tag: 'Client Relations',
+			tag: m['features.cards.client.tag'],
 			points: [
 				{ Icon: UserPlus, text: m['features.cards.client.one'] },
 				{ Icon: Database, text: m['features.cards.client.two'] },
@@ -72,9 +71,9 @@
 			title: m['features.cards.profile.title'],
 			description: m['features.cards.profile.description'],
 			img: '/images/profile-screen.png',
-			color: 'accent',
+			color: 'profile' as FeatureColor,
 			Icon: UserCog,
-			tag: 'Professional Profile',
+			tag: m['features.cards.profile.tag'],
 			points: [
 				{ Icon: UserCog, text: m['features.cards.profile.one'] },
 				{ Icon: BadgeCheck, text: m['features.cards.profile.two'] },
@@ -85,9 +84,9 @@
 			title: m['features.cards.availability.title'],
 			description: m['features.cards.availability.description'],
 			img: '/images/availability-screen.png',
-			color: 'pending',
+			color: 'availability' as FeatureColor,
 			Icon: Calendar,
-			tag: 'Availability Control',
+			tag: m['features.cards.availability.tag'],
 			points: [
 				{ Icon: Calendar, text: m['features.cards.availability.one'] },
 				{ Icon: FastForward, text: m['features.cards.availability.two'] },
@@ -98,46 +97,81 @@
 
 	// Color utility maps for feature cards - updated for sophistication
 	const colorClasses: Record<string, string> = {
-		confirmed: 'border-primary/80',
-		secondary: 'border-secondary/80',
-		accent: 'border-primary/70',
-		pending: 'border-primary/60'
+		schedule: 'border-primary/80',
+		client: 'border-secondary/80',
+		profile: 'border-confirmed',
+		availability: 'border-pending'
 	};
 
 	const bgClasses: Record<string, string> = {
-		confirmed: 'bg-primary/5',
-		secondary: 'bg-secondary/5',
-		accent: 'bg-primary/5',
-		pending: 'bg-primary/5'
+		schedule: 'bg-primary/5',
+		client: 'bg-secondary/5',
+		profile: 'bg-accent/30',
+		availability: 'bg-pending/5'
 	};
 
 	// Coming soon features
 	const upcomingFeatures = [
 		{
 			icon: Laptop,
-			title: 'Desktop App',
-			description: 'Native application for Windows & Mac'
+			title: m['landing.coming_soon.features.profile.title'],
+			description: m['landing.coming_soon.features.profile.description']
 		},
 		{
 			icon: Globe,
-			title: 'Global Network',
-			description: 'International legal professional directory'
+			title: m['landing.coming_soon.features.leads.title'],
+			description: m['landing.coming_soon.features.leads.description']
 		},
 		{
 			icon: MessageSquare,
-			title: 'Client Portal',
-			description: 'Secure client communication hub'
+			title: m['landing.coming_soon.features.client_portal.title'],
+			description: m['landing.coming_soon.features.client_portal.description']
 		},
 		{
 			icon: Sparkles,
-			title: 'AI Assistant',
-			description: 'Smart scheduling & document analysis'
+			title: m['landing.coming_soon.features.ai_assistant.title'],
+			description: m['landing.coming_soon.features.ai_assistant.description']
+		},
+		{
+			icon: CalendarCheck,
+			title: m['landing.coming_soon.features.scheduling.title'],
+			description: m['landing.coming_soon.features.scheduling.description']
+		},
+		{
+			icon: Scale,
+			title: m['landing.coming_soon.features.case_management.title'],
+			description: m['landing.coming_soon.features.case_management.description']
 		}
 	];
 </script>
 
 <!-- More sophisticated gradient background -->
 <div class="relative min-h-screen bg-gradient-to-b from-[#f8faff] via-[#fcfdff] to-white">
+	<!-- Language Selector -->
+	<div
+		class="absolute top-6 right-6 z-50 flex items-center gap-2 rounded-full bg-white/80 px-2 py-1.5 shadow-sm backdrop-blur-sm"
+	>
+		<button
+			type="button"
+			onclick={() => setLocale('fr')}
+			class={`text-primary/80 hover:text-primary hover:bg-primary/5 relative cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-300 ${
+				getLocale() === 'fr' ? 'bg-primary/10 text-primary' : ''
+			}`}
+		>
+			FR
+		</button>
+		<div class="h-4 w-px bg-gray-200"></div>
+		<button
+			type="button"
+			onclick={() => setLocale('en')}
+			class={`text-primary/80 hover:text-primary hover:bg-primary/5 relative cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-300 ${
+				getLocale() === 'en' ? 'bg-primary/10 text-primary' : ''
+			}`}
+		>
+			EN
+		</button>
+	</div>
+
 	<!-- Decorative background elements -->
 	<div class="absolute inset-0 overflow-hidden">
 		<div class="bg-primary/[0.02] absolute -top-4 -right-4 h-64 w-64 rounded-full blur-3xl"></div>
@@ -169,12 +203,12 @@
 			<div class="flex items-center justify-center gap-8 text-slate-600">
 				<div class="flex items-center gap-2">
 					<Shield class="text-primary/70 h-5 w-5" />
-					<span class="text-sm font-medium">Bank-Grade Security</span>
+					<span class="text-sm font-medium">{m['landing.trust.security']()}</span>
 				</div>
 				<div class="hidden h-4 w-px bg-slate-200 md:block"></div>
 				<div class="flex items-center gap-2">
 					<Scale class="text-primary/70 h-5 w-5" />
-					<span class="text-sm font-medium">Legal Tech Innovation</span>
+					<span class="text-sm font-medium">{m['landing.trust.innovation']()}</span>
 				</div>
 			</div>
 
@@ -184,7 +218,7 @@
 					<span
 						class="bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800 bg-clip-text text-transparent"
 					>
-						Elevate Your Legal Practice
+						{m['landing.hero.title']()}
 					</span>
 				</h1>
 				<!-- Subtle highlight effect -->
@@ -202,8 +236,7 @@
 			</div>
 
 			<p class="mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-600 sm:text-xl">
-				Join an exclusive network of forward-thinking legal professionals shaping the future of
-				client engagement
+				{m['landing.hero.subtitle']()}
 			</p>
 
 			<!-- CTA section with enhanced design -->
@@ -212,7 +245,7 @@
 					href="#signup-form"
 					class="group bg-primary/95 hover:bg-primary/90 inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-semibold text-white shadow-md transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:shadow-lg"
 				>
-					<span>Get Early Access</span>
+					<span>{m['landing.hero.cta']()}</span>
 					<ArrowRight class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
 				</a>
 
@@ -221,7 +254,7 @@
 					class="flex items-center gap-2 rounded-full bg-slate-50 px-4 py-2 text-sm text-slate-600"
 				>
 					<Sparkles class="text-primary/70 h-4 w-4" />
-					<span>Trusted by Leading Law Firms</span>
+					<span>{m['landing.hero.trust_badge']()}</span>
 				</div>
 			</div>
 		</div>
@@ -240,7 +273,7 @@
 						<feature.Icon class="text-primary/80 text-3xl" />
 					</div>
 					<div class="text-primary/90 mb-3 text-sm font-semibold tracking-wider uppercase">
-						{feature.tag}
+						{feature.tag()}
 					</div>
 					<div class="mb-3 text-xl font-bold text-slate-800">{feature.title()}</div>
 					<div class="mb-6 text-base leading-relaxed text-slate-600">{feature.description()}</div>
@@ -269,35 +302,33 @@
 				<div class="mb-4 flex items-center justify-center gap-2">
 					<Sparkles class="text-primary/70 h-6 w-6" />
 					<span class="text-primary/80 text-sm font-semibold tracking-wider uppercase"
-						>Coming Soon</span
+						>{m['landing.coming_soon.badge']()}</span
 					>
 				</div>
-				<h2 class="mb-4 text-3xl font-bold text-slate-800">The Future of Legal Practice</h2>
+				<h2 class="mb-4 text-3xl font-bold text-slate-800">{m['landing.coming_soon.title']()}</h2>
 				<p class="mx-auto max-w-2xl text-slate-600">
-					We're building the next generation of legal technology. Here's a preview of what's coming
-					next.
+					{m['landing.coming_soon.subtitle']()}
 				</p>
 			</div>
 
-			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-				{#each upcomingFeatures as feature}
-					<div class="group relative">
-						<div
-							class="from-primary/[0.03] absolute inset-0 rounded-2xl bg-gradient-to-b to-transparent"
-						></div>
-						<div
-							class="relative rounded-2xl bg-white/50 p-6 text-center backdrop-blur-sm transition-transform duration-300 hover:translate-y-[-2px]"
-						>
+			<div class="mt-24">
+				<div class="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
+					<div
+						class="mx-auto grid max-w-2xl grid-cols-1 gap-8 text-center sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+					>
+						{#each upcomingFeatures as feature}
 							<div
-								class="bg-primary/5 mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+								class="flex flex-col items-center rounded-3xl bg-white px-8 py-10 shadow-lg ring-1 ring-gray-200"
 							>
 								<feature.icon class="text-primary/70 h-6 w-6" />
+								<h3 class="mt-6 text-base leading-7 font-semibold tracking-tight text-gray-900">
+									{feature.title()}
+								</h3>
+								<p class="mt-2 text-sm leading-6 text-gray-600">{feature.description()}</p>
 							</div>
-							<h3 class="mb-2 font-semibold text-slate-800">{feature.title}</h3>
-							<p class="text-sm text-slate-600">{feature.description}</p>
-						</div>
+						{/each}
 					</div>
-				{/each}
+				</div>
 			</div>
 
 			<div class="mt-16 text-center">
@@ -305,7 +336,7 @@
 					class="bg-primary/5 text-primary/80 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
 				>
 					<Clock class="h-4 w-4" />
-					<span>Early Access Coming Q2 2024</span>
+					<span>{m['landing.coming_soon.early_access']()}</span>
 				</div>
 			</div>
 		</div>
@@ -321,42 +352,34 @@
 		>
 			<div class="mx-auto mb-12 max-w-2xl text-center">
 				<h2 class="mb-4 text-4xl leading-tight font-bold text-slate-800">
-					Join the JustiConnect Beta
+					{m['landing.beta.title']()}
 				</h2>
 				<p class="text-lg leading-relaxed text-slate-600">
-					Connect with forward-thinking lawyers. Shape the future of legal technology.
+					{m['landing.beta.subtitle']()}
 				</p>
 			</div>
-			<BetaSignupForm {form} {formData} {showNdaModal} {enhance} {locationsAndSpecializations} />
+
+			<BetaSignupForm {form} {formData} {enhance} {locationsAndSpecializations} />
+
+			<div class="mt-8 space-y-4">
+				<div class="flex items-center justify-between text-sm">
+					<div class="flex items-center gap-2 text-gray-500">
+						<span>{m['form.footer.contact.question']()}</span>
+						<a
+							href="mailto:support@justiconnect.com"
+							class="text-primary/80 hover:text-primary inline-flex items-center gap-1.5 font-medium transition-colors duration-200"
+						>
+							{m['form.footer.contact.email']()}
+						</a>
+					</div>
+					<div class="flex items-center gap-1.5 text-gray-400">
+						{m['form.footer.madeIn']()}
+					</div>
+				</div>
+				<div class="flex items-center text-sm text-gray-400">
+					<p>{m['form.footer.copyright']({ year: new Date().getFullYear() })}</p>
+				</div>
+			</div>
 		</div>
 	</main>
 </div>
-
-<!-- NDA Modal with refined styling -->
-{#if showNdaModal}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-6 backdrop-blur-sm"
-		role="dialog"
-		aria-modal="true"
-	>
-		<div class="relative w-full max-w-2xl rounded-2xl bg-white p-8 shadow-2xl">
-			<button
-				class="absolute top-4 right-4 text-slate-400 transition-colors duration-200 hover:text-slate-600"
-				onclick={() => (showNdaModal = false)}
-				aria-label="Close">✕</button
-			>
-			<h2 class="mb-6 text-2xl font-bold text-slate-800">NDA & Beta Terms</h2>
-			<div class="prose prose-slate prose-sm max-h-[60vh] overflow-y-auto">
-				<p>
-					By participating in the JustiConnect Beta Program, you agree to maintain the
-					confidentiality of all information shared during the beta testing period...
-				</p>
-				<!-- Add more terms content here -->
-			</div>
-			<button
-				class="bg-primary/95 hover:bg-primary/90 transition-smooth mt-6 w-full rounded-xl py-3 font-semibold text-white hover:translate-y-[-1px] hover:shadow-lg"
-				onclick={() => (showNdaModal = false)}>Close</button
-			>
-		</div>
-	</div>
-{/if}

@@ -11,7 +11,8 @@
 				"one": "View and manage all your appointments",
 				"two": "Automated status updates for bookings",
 				"three": "Real-time availability updates",
-				"four": "intuitive calendar interface"
+				"four": "intuitive calendar interface",
+				"tag": "Smart Scheduling"
 			},
 			"client": {
 				"title": "Client Management",
@@ -19,7 +20,8 @@
 				"one": "Track consultation history with each client",
 				"two": "View and manage all your clients",
 				"three": "Easy access to client contact information",
-				"four": "Flexible appointment status tracking"
+				"four": "Flexible appointment status tracking",
+				"tag": "Client Relations"
 			},
 			"profile": {
 				"title": "Professional Profile",
@@ -27,7 +29,8 @@
 				"one": "Showcase your expertise and credentials",
 				"two": "Multiple language support",
 				"three": "Customizable availability by location",
-				"four": "Set your consultation fees"
+				"four": "Set your consultation fees",
+				"tag": "Professional Profile"
 			},
 			"availability": {
 				"title": "Availability Control",
@@ -35,7 +38,215 @@
 				"one": "Flexible time slot management",
 				"two": "Define specific meeting durations",
 				"three": "Manage off days and holidays",
-				"four": "Set custom schedule blocks for each day"
+				"four": "Set custom schedule blocks for each day",
+				"tag": "Availability Control"
+			}
+		}
+	},
+	"landing": {
+		"trust": {
+			"security": "Bank-Grade Security",
+			"innovation": "Legal Tech Innovation"
+		},
+		"hero": {
+			"title": "Elevate Your Legal Practice",
+			"subtitle": "Join an exclusive network of forward-thinking legal professionals shaping the future of client engagement",
+			"cta": "Get Early Access",
+			"trust_badge": "Trusted by Leading Law Firms"
+		},
+		"coming_soon": {
+			"badge": "Coming Soon",
+			"title": "Powerful Features Coming Soon",
+			"subtitle": "Join our beta program to be the first to experience these game-changing features designed specifically for legal professionals.",
+			"features": {
+				"desktop": {
+					"title": "Desktop App",
+					"description": "Native application for Windows & Mac"
+				},
+				"network": {
+					"title": "Global Network",
+					"description": "International legal professional directory"
+				},
+				"portal": {
+					"title": "Client Portal",
+					"description": "Secure client communication hub"
+				},
+				"ai": {
+					"title": "AI Assistant",
+					"description": "Smart scheduling & document analysis"
+				},
+				"profile": {
+					"title": "Professional Profile",
+					"description": "Create a compelling online presence that showcases your expertise, practice areas, and client success stories."
+				},
+				"leads": {
+					"title": "Lead Generation",
+					"description": "Connect with potential clients through our smart matching system that aligns their legal needs with your expertise."
+				},
+				"client_portal": {
+					"title": "Client Portal",
+					"description": "Provide your clients with a secure portal to share documents, track case progress, and communicate efficiently."
+				},
+				"ai_assistant": {
+					"title": "AI Legal Assistant",
+					"description": "Streamline routine tasks with AI-powered document drafting, research assistance, and case analysis."
+				},
+				"scheduling": {
+					"title": "Smart Scheduling",
+					"description": "Effortlessly manage consultations and court appearances with automated scheduling and reminders."
+				},
+				"case_management": {
+					"title": "Case Management",
+					"description": "Keep your practice organized with integrated case tracking, deadline management, and document organization."
+				}
+			},
+			"early_access": "Early Access Coming Q2 2024"
+		},
+		"beta": {
+			"title": "Join the JustiConnect Beta",
+			"subtitle": "Connect with forward-thinking lawyers. Shape the future of legal technology."
+		}
+	},
+	"form": {
+		"sections": {
+			"personal": {
+				"title": "Personal Information",
+				"firstName": {
+					"label": "First Name",
+					"description": "Used for your public profile"
+				},
+				"lastName": {
+					"label": "Last Name"
+				},
+				"email": {
+					"label": "Email",
+					"description": "We'll send your invite here"
+				},
+				"phone": {
+					"label": "Phone",
+					"description": "For identity verification only"
+				}
+			},
+			"professional": {
+				"title": "Professional Information",
+				"province": {
+					"label": "Province",
+					"placeholder": "Select your province"
+				},
+				"city": {
+					"label": "City",
+					"description": "Your primary practice location",
+					"placeholder": "Select your city"
+				},
+				"specializations": {
+					"label": "Areas of Practice",
+					"description": "Select all that apply",
+					"placeholder": "Select your practice areas",
+					"maxLimit": "(max 3)"
+				},
+				"yearsPractice": {
+					"label": "Years of Practice"
+				},
+				"firmName": {
+					"label": "Firm Name",
+					"description": "Optional"
+				},
+				"website": {
+					"label": "Website",
+					"description": "Optional - must start with https://"
+				},
+				"otherSpecialization": {
+					"label": "Please describe your specialization",
+					"placeholder": "Describe your specialization here..."
+				}
+			},
+			"additional": {
+				"title": "Additional Information",
+				"referralSource": {
+					"label": "How did you hear about us?"
+				},
+				"agreeBeta": {
+					"label": "I accept the NDA & Beta Terms"
+				}
+			}
+		},
+		"submit": "Submit Application",
+		"footer": {
+			"copyright": "© {year} JustiConnect. All rights reserved.",
+			"madeIn": "Made with 🍁 in Canada",
+			"contact": {
+				"question": "Have questions?",
+				"email": "Contact us at support@justiconnect.com"
+			}
+		},
+		"nda": {
+			"title": "NDA & Beta Terms",
+			"close": "Close"
+		},
+		"errors": {
+			"firstName": {
+				"required": "First name is required",
+				"invalid": "Invalid first name",
+				"tooShort": "First name must be at least 2 characters",
+				"tooLong": "First name must be less than 40 characters"
+			},
+			"lastName": {
+				"required": "Last name is required",
+				"invalid": "Invalid last name",
+				"tooShort": "Last name must be at least 2 characters",
+				"tooLong": "Last name must be less than 40 characters"
+			},
+			"email": {
+				"required": "Email is required",
+				"invalid": "Please enter a valid email address"
+			},
+			"phone": {
+				"required": "Phone number is required",
+				"invalid": "Please enter a valid Canadian phone number"
+			},
+			"province": {
+				"required": "Province is required",
+				"invalid": "Please select a valid province"
+			},
+			"city": {
+				"required": "City is required",
+				"invalid": "Please select a valid city",
+				"tooShort": "City name must be at least 2 characters",
+				"tooLong": "City name must be less than 50 characters"
+			},
+			"specializations": {
+				"required": "Please select at least one specialization",
+				"invalid": "Invalid specialization selection",
+				"min": "Please select at least one specialization",
+				"max": "You can select up to 3 specializations"
+			},
+			"yearsPractice": {
+				"required": "Years of practice is required",
+				"invalid": "Please enter a valid number",
+				"integer": "Years must be a whole number",
+				"min": "Years of practice cannot be negative",
+				"max": "Years of practice cannot exceed 70"
+			},
+			"firmName": {
+				"invalid": "Invalid firm name",
+				"tooLong": "Firm name must be less than 100 characters"
+			},
+			"agreeBeta": {
+				"required": "You must accept the NDA & Beta Terms to continue"
+			},
+			"website": {
+				"invalid": "Please enter a valid website URL",
+				"https": "Website URL must start with https://"
+			},
+			"referralSource": {
+				"required": "Please select how you heard about us",
+				"invalid": "Please select a valid option"
+			},
+			"otherSpecialization": {
+				"required": "Please describe your specialization",
+				"invalid": "Invalid specialization description",
+				"tooShort": "Description must be at least 2 characters",
+				"tooLong": "Description must be less than 100 characters"
 			}
 		}
 	}

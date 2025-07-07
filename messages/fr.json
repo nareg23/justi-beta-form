@@ -11,7 +11,8 @@
 				"one": "Consultez et gérez tous vos rendez-vous",
 				"two": "Mises à jour automatiques du statut des réservations",
 				"three": "Mises à jour de disponibilité en temps réel",
-				"four": "Interface de calendrier intuitive"
+				"four": "Interface de calendrier intuitive",
+				"tag": "Planification Intelligente"
 			},
 			"client": {
 				"title": "Gestion des clients",
@@ -19,7 +20,8 @@
 				"one": "Historique des consultations pour chaque client",
 				"two": "Consultez et gérez tous vos clients",
 				"three": "Accès facile aux coordonnées des clients",
-				"four": "Suivi flexible du statut des rendez-vous"
+				"four": "Suivi flexible du statut des rendez-vous",
+				"tag": "Relations Clients"
 			},
 			"profile": {
 				"title": "Profil professionnel",
@@ -27,7 +29,8 @@
 				"one": "Mettez en valeur votre expertise et vos certifications",
 				"two": "Support multilingue",
 				"three": "Disponibilité personnalisable par emplacement",
-				"four": "Définissez vos frais de consultation"
+				"four": "Définissez vos frais de consultation",
+				"tag": "Profil Professionnel"
 			},
 			"availability": {
 				"title": "Contrôle de la disponibilité",
@@ -35,7 +38,215 @@
 				"one": "Gestion flexible des créneaux horaires",
 				"two": "Définissez la durée des rencontres",
 				"three": "Gérez vos jours de congé et vos vacances",
-				"four": "Créez des plages horaires personnalisées pour chaque jour"
+				"four": "Créez des plages horaires personnalisées pour chaque jour",
+				"tag": "Contrôle des Disponibilités"
+			}
+		}
+	},
+	"landing": {
+		"trust": {
+			"security": "Sécurité de niveau bancaire",
+			"innovation": "Innovation en technologie juridique"
+		},
+		"hero": {
+			"title": "Élevez votre pratique juridique",
+			"subtitle": "Rejoignez un réseau exclusif de professionnels du droit avant-gardistes qui façonnent l'avenir de l'engagement client",
+			"cta": "Accès anticipé",
+			"trust_badge": "Approuvé par les cabinets d'avocats leaders"
+		},
+		"coming_soon": {
+			"badge": "À venir",
+			"title": "Fonctionnalités Puissantes à Venir",
+			"subtitle": "Rejoignez notre programme bêta pour être parmi les premiers à découvrir ces fonctionnalités innovantes conçues spécifiquement pour les professionnels du droit.",
+			"features": {
+				"desktop": {
+					"title": "Application de bureau",
+					"description": "Application native pour Windows et Mac"
+				},
+				"network": {
+					"title": "Réseau mondial",
+					"description": "Répertoire international de professionnels du droit"
+				},
+				"portal": {
+					"title": "Portail client",
+					"description": "Hub sécurisé de communication client"
+				},
+				"ai": {
+					"title": "Assistant IA",
+					"description": "Planification intelligente et analyse de documents"
+				},
+				"profile": {
+					"title": "Profil Professionnel",
+					"description": "Créez une présence en ligne convaincante qui met en valeur votre expertise, vos domaines de pratique et vos succès."
+				},
+				"leads": {
+					"title": "Génération de Prospects",
+					"description": "Connectez-vous avec des clients potentiels grâce à notre système intelligent qui aligne leurs besoins juridiques avec votre expertise."
+				},
+				"client_portal": {
+					"title": "Portail Client",
+					"description": "Offrez à vos clients un portail sécurisé pour partager des documents, suivre l'avancement des dossiers et communiquer efficacement."
+				},
+				"ai_assistant": {
+					"title": "Assistant Juridique IA",
+					"description": "Simplifiez les tâches routinières avec la rédaction de documents, l'assistance à la recherche et l'analyse de cas assistées par l'IA."
+				},
+				"scheduling": {
+					"title": "Gestion Intelligente du Calendrier",
+					"description": "Gérez sans effort les consultations et les audiences avec la planification et les rappels automatisés."
+				},
+				"case_management": {
+					"title": "Gestion des Dossiers",
+					"description": "Gardez votre cabinet organisé avec le suivi intégré des dossiers, la gestion des échéances et l'organisation des documents."
+				}
+			},
+			"early_access": "Accès anticipé prévu pour Q2 2024"
+		},
+		"beta": {
+			"title": "Rejoignez la bêta de JustiConnect",
+			"subtitle": "Connectez-vous avec des avocats innovants. Façonnez l'avenir de la technologie juridique."
+		}
+	},
+	"form": {
+		"sections": {
+			"personal": {
+				"title": "Informations personnelles",
+				"firstName": {
+					"label": "Prénom",
+					"description": "Utilisé pour votre profil public"
+				},
+				"lastName": {
+					"label": "Nom de famille"
+				},
+				"email": {
+					"label": "Courriel",
+					"description": "Nous enverrons votre invitation ici"
+				},
+				"phone": {
+					"label": "Téléphone",
+					"description": "Pour la vérification d'identité uniquement"
+				}
+			},
+			"professional": {
+				"title": "Informations professionnelles",
+				"province": {
+					"label": "Province",
+					"placeholder": "Sélectionnez votre province"
+				},
+				"city": {
+					"label": "Ville",
+					"description": "Votre lieu de pratique principal",
+					"placeholder": "Sélectionnez votre ville"
+				},
+				"specializations": {
+					"label": "Domaines de pratique",
+					"description": "Sélectionnez tous ceux qui s'appliquent",
+					"placeholder": "Sélectionnez vos domaines de pratique",
+					"maxLimit": "(max 3)"
+				},
+				"yearsPractice": {
+					"label": "Années de pratique"
+				},
+				"firmName": {
+					"label": "Nom du cabinet",
+					"description": "Optionnel"
+				},
+				"website": {
+					"label": "Site web",
+					"description": "Optionnel - doit commencer par https://"
+				},
+				"otherSpecialization": {
+					"label": "Veuillez décrire votre spécialisation",
+					"placeholder": "Décrivez votre spécialisation ici..."
+				}
+			},
+			"additional": {
+				"title": "Informations supplémentaires",
+				"referralSource": {
+					"label": "Comment avez-vous entendu parler de nous ?"
+				},
+				"agreeBeta": {
+					"label": "J'accepte l'accord de confidentialité et les conditions de la version bêta"
+				}
+			}
+		},
+		"submit": "Soumettre la candidature",
+		"footer": {
+			"copyright": "© {year} JustiConnect. Tous droits réservés.",
+			"madeIn": "Fait avec 🍁 au Canada",
+			"contact": {
+				"question": "Des questions ?",
+				"email": "Contactez-nous à support@justiconnect.com"
+			}
+		},
+		"nda": {
+			"title": "Accord de confidentialité et conditions de la version bêta",
+			"close": "Fermer"
+		},
+		"errors": {
+			"firstName": {
+				"required": "Le prénom est requis",
+				"invalid": "Prénom invalide",
+				"tooShort": "Le prénom doit contenir au moins 2 caractères",
+				"tooLong": "Le prénom doit contenir moins de 40 caractères"
+			},
+			"lastName": {
+				"required": "Le nom est requis",
+				"invalid": "Nom invalide",
+				"tooShort": "Le nom doit contenir au moins 2 caractères",
+				"tooLong": "Le nom doit contenir moins de 40 caractères"
+			},
+			"email": {
+				"required": "L'email est requis",
+				"invalid": "Veuillez entrer une adresse email valide"
+			},
+			"phone": {
+				"required": "Le numéro de téléphone est requis",
+				"invalid": "Veuillez entrer un numéro de téléphone canadien valide"
+			},
+			"province": {
+				"required": "La province est requise",
+				"invalid": "Veuillez sélectionner une province valide"
+			},
+			"city": {
+				"required": "La ville est requise",
+				"invalid": "Veuillez sélectionner une ville valide",
+				"tooShort": "Le nom de la ville doit contenir au moins 2 caractères",
+				"tooLong": "Le nom de la ville doit contenir moins de 50 caractères"
+			},
+			"specializations": {
+				"required": "Veuillez sélectionner au moins une spécialisation",
+				"invalid": "Sélection de spécialisation invalide",
+				"min": "Veuillez sélectionner au moins une spécialisation",
+				"max": "Vous pouvez sélectionner jusqu'à 3 spécialisations"
+			},
+			"yearsPractice": {
+				"required": "Les années de pratique sont requises",
+				"invalid": "Veuillez entrer un nombre valide",
+				"integer": "Les années doivent être un nombre entier",
+				"min": "Les années de pratique ne peuvent pas être négatives",
+				"max": "Les années de pratique ne peuvent pas dépasser 70"
+			},
+			"firmName": {
+				"invalid": "Nom du cabinet invalide",
+				"tooLong": "Le nom du cabinet doit contenir moins de 100 caractères"
+			},
+			"agreeBeta": {
+				"required": "Vous devez accepter les conditions de l'accord de confidentialité pour continuer"
+			},
+			"website": {
+				"invalid": "Veuillez entrer une URL de site web valide",
+				"https": "L'URL du site web doit commencer par https://"
+			},
+			"referralSource": {
+				"required": "Veuillez sélectionner comment vous avez entendu parler de nous",
+				"invalid": "Veuillez sélectionner une option valide"
+			},
+			"otherSpecialization": {
+				"required": "Veuillez décrire votre spécialisation",
+				"invalid": "Description de spécialisation invalide",
+				"tooShort": "La description doit contenir au moins 2 caractères",
+				"tooLong": "La description doit contenir moins de 100 caractères"
 			}
 		}
 	}
