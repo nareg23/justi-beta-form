@@ -1,0 +1,435 @@
+@import 'tailwindcss';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+}
+
+@layer base {
+	:root {
+		/* Converted from hsl(220 60% 98%) */
+		--background: oklch(0.987 0.0035 242.86);
+		/* Converted from hsl(232 36% 15%) */
+		--foreground: oklch(0.176 0.022 248.68);
+		/* Converted from hsl(240 15% 94%) */
+		--muted: oklch(0.943 0.007 251.92);
+		/* Converted from hsl(240 10% 40%) */
+		--muted-foreground: oklch(0.421 0.007 251.92);
+		/* Converted from hsl(239 0% 100%) */
+		--popover: oklch(1 0 0);
+		/* Converted from hsl(239 50% 5%) */
+		--popover-foreground: oklch(0.052 0.019 251.82);
+		/* Converted from hsl(239 0% 100%) */
+		--card: oklch(1 0 0);
+		/* Converted from hsl(239 5% 10%) */
+		--card-foreground: oklch(0.104 0.004 251.82);
+		/* Converted from hsl(239 0% 80%) */
+		--border: oklch(0.827 0 0);
+		/* Converted from hsl(230 30% 96%) */
+		--input: oklch(0.965 0.011 242.86);
+		/* Converted from hsl(230 90% 60%) */
+		--primary: oklch(0.627 0.171 242.86);
+		/* Converted from hsl(230 85% 45%) */
+		--primary-strong: oklch(0.478 0.161 242.86);
+		/* Converted from hsl(232 56% 38%) */
+		--primary-stronger: oklch(0.403 0.127 244.68);
+		/* Converted from hsl(0 0% 100%) */
+		--primary-foreground: oklch(1 0 0);
+		/* Converted from hsl(345 100% 70%) */
+		--secondary: oklch(0.737 0.208 3.45);
+		/* Converted from hsl(339 63% 41%) */
+		--secondary-strong: oklch(0.436 0.143 359.39);
+		/* Converted from hsl(334 0% 100%) */
+		--secondary-foreground: oklch(1 0 0);
+		/* Converted from hsl(119 25% 94%) */
+		--accent: oklch(0.905 0.055 141.92);
+		/* Converted from hsl(119 92% 2%) */
+		--accent-foreground: oklch(0.029 0.019 141.92);
+		/* Converted from hsl(3.19 100% 59.41%) */
+		--destructive: oklch(0.627 0.249 27.05);
+		/* Converted from hsl(18 0% 100%) */
+		--destructive-foreground: oklch(1 0 0);
+		/* Converted from hsl(239 70% 75%) */
+		--ring: oklch(0.776 0.127 251.82);
+		--radius: 0.6rem;
+
+		/* Custom status variables */
+		/* Soft honey yellow for pending - warm and readable */
+		--pending: oklch(0.82 0.12 70);
+		/* Rich amber text */
+		--pending-foreground: oklch(0.38 0.15 70);
+		/* Fresh emerald for confirmed - success and growth */
+		--confirmed: oklch(0.8 0.14 160);
+		/* Deep emerald text */
+		--confirmed-foreground: oklch(0.28 0.12 160);
+		/* Cool charcoal for neutral - strong contrast and modern */
+		--neutral: oklch(0.58 0.06 250);
+		/* Light text for dark neutral */
+		--neutral-foreground: oklch(0.95 0.02 250);
+		/* Soft coral for cancelled - gentle but clear */
+		--cancelled: oklch(0.78 0.14 25);
+		/* Deep coral text */
+		--cancelled-foreground: oklch(0.32 0.12 25);
+
+		/* Fonts */
+		--font-body: 'Nunito Sans Variable', sans-serif;
+		--font-heading: 'Roboto Variable', sans-serif;
+
+		/* Chart colors */
+		--chart-1: oklch(0.78 0.14 70); /* Soft honey yellow - matches pending */
+		--chart-2: oklch(0.72 0.15 160); /* Fresh emerald - matches confirmed */
+		--chart-3: oklch(0.72 0.15 25); /* Soft coral - matches cancelled */
+		--chart-4: oklch(0.68 0.18 242.86); /* Enhanced primary blue - your brand */
+		--chart-5: oklch(0.65 0.12 285); /* Rich purple - beautiful complement */
+		--chart-6: oklch(0.55 0.08 250); /* Cool charcoal - matches neutral */
+
+		/* Tailwind Core Screen Definitions */
+		--tw-screen-sm: 640px;
+		--tw-screen-md: 768px;
+		--tw-screen-lg: 1024px;
+		--tw-screen-xl: 1280px;
+		--tw-screen-2xl: 1536px;
+	}
+}
+
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-100% - var(--gap)));
+	}
+}
+
+@keyframes marquee-vertical {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(calc(-100% - var(--gap)));
+	}
+}
+
+.animate-marquee {
+	animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+	animation: marquee-vertical var(--duration) linear infinite;
+}
+
+@theme inline {
+	/* Radius (for rounded-*) */
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+
+	/* Colors */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-ring: var(--ring);
+	--color-radius: var(--radius);
+
+	/* Custom status colors */
+	--color-pending: var(--pending);
+	--color-pending-foreground: var(--pending-foreground);
+	--color-confirmed: var(--confirmed);
+	--color-confirmed-foreground: var(--confirmed-foreground);
+	--color-neutral: var(--neutral);
+	--color-neutral-foreground: var(--neutral-foreground);
+	--color-cancelled: var(--cancelled);
+	--color-cancelled-foreground: var(--cancelled-foreground);
+
+	/* Chart colors */
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-chart-6: var(--chart-6);
+
+	/* Fonts */
+	--font-family-body: var(--font-body);
+	--font-family-heading: var(--font-heading);
+
+	/* Sidebar color variables are intentionally omitted here to preserve original theme as they map to the above */
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+		font-family: var(--font-body);
+	}
+	.justi-header {
+		@apply text-center text-4xl leading-tight font-medium tracking-tight text-balance md:text-4xl lg:text-6xl;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading);
+	}
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: oklch(var(--muted));
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: oklch(var(--primary));
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: oklch(var(--primary-strong));
+}
+
+::-webkit-scrollbar-corner {
+	background: oklch(var(--muted));
+}
+
+/* Firefox scrollbar styling */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary) var(--muted);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+.background-gradient-secondary {
+	background-color: black;
+	background-image: linear-gradient(
+		120deg,
+		oklch(var(--secondary-strong)) 0%,
+		oklch(var(--secondary-strong) / 0.5) 25%,
+		oklch(var(--secondary-strong) / 0.3) 50%,
+		oklch(var(--secondary-strong) / 0.5) 75%,
+		oklch(var(--secondary-strong)) 100%
+	);
+	position: relative;
+}
+.background-gradient-secondary::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-color: transparent;
+	background-image: radial-gradient(
+		oklch(var(--foreground) / 50%) 1px,
+		oklch(var(--foreground) / 2%) 1px
+	);
+	background-size: 30px 30px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.background-gradient-secondary * {
+	z-index: 5;
+}
+
+.background-gradient-primary {
+	background-image: linear-gradient(
+		180deg,
+		oklch(var(--primary-stronger) / 0.2) 0%,
+		oklch(var(--primary-stronger) / 0.1) 25%,
+		oklch(var(--primary-stronger) / 0.07) 50%,
+		oklch(var(--primary-stronger) / 0.03) 75%,
+		oklch(var(--primary-strong) / 0) 100%
+	);
+	background-color: oklch(var(--foreground));
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.background-gradient-primary::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-color: transparent;
+	background-image: radial-gradient(
+		oklch(var(--background) / 10%) 1px,
+		oklch(var(--background) / 3%) 1px
+	);
+	background-size: 30px 30px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+.background-gradient-primary * {
+	z-index: 5;
+}
+
+/* Define the enhanced container in the components layer */
+@layer components {
+	.container {
+		@apply mx-auto w-full px-2 sm:px-6 lg:px-8;
+		max-width: min(90rem, 100% - 2rem);
+	}
+}
+
+/* Enhanced gradient text animation */
+@keyframes gradient-shift {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+.text-gradient {
+	background-size: 200% 200%;
+	animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0px) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-10px) rotate(5deg);
+	}
+}
+
+.animate-float {
+	animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced backdrop blur effect */
+.backdrop-blur-sm {
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+/* Custom hover effects for buttons */
+@keyframes button-glow {
+	0%,
+	100% {
+		box-shadow: 0 0 5px rgba(var(--primary), 0.5);
+	}
+	50% {
+		box-shadow:
+			0 0 20px rgba(var(--primary), 0.8),
+			0 0 30px rgba(var(--primary), 0.4);
+	}
+}
+
+.button-glow:hover {
+	animation: button-glow 2s ease-in-out infinite;
+}
+
+/* Enhanced pulse animation with color variations */
+@keyframes pulse-primary {
+	0%,
+	100% {
+		opacity: 0.6;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.1);
+	}
+}
+
+@keyframes pulse-secondary {
+	0%,
+	100% {
+		opacity: 0.7;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+}
+
+.animate-pulse-primary {
+	animation: pulse-primary 2s ease-in-out infinite;
+}
+
+.animate-pulse-secondary {
+	animation: pulse-secondary 2.5s ease-in-out infinite;
+}
+
+/* Smooth scale transitions */
+.transition-smooth {
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced shadow effects */
+.shadow-glow {
+	box-shadow:
+		0 0 30px rgba(var(--primary), 0.15),
+		0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-glow-secondary {
+	box-shadow:
+		0 0 30px rgba(var(--secondary), 0.15),
+		0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.bg-dark {
+	background: -webkit-linear-gradient(
+		to top,
+		#0f2027,
+		#003c5f,
+		#005384
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to top,
+		#020e13,
+		#002f4b,
+		#002236
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
