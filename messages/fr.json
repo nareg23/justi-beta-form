@@ -1,0 +1,42 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"features": {
+		"badge": "Fonctionnalités",
+		"title": "Optimisez votre pratique juridique",
+		"subtitle": "Élevez vos services juridiques grâce à notre plateforme intuitive conçue pour les avocats d'aujourd'hui. Gérez vos rendez-vous, mettez en valeur votre expertise et développez votre pratique — le tout en un seul endroit.",
+		"cards": {
+			"schedule": {
+				"title": "Système de planification intelligent",
+				"description": "Gérez vos rendez-vous facilement pour ne plus jamais manquer une session.",
+				"one": "Consultez et gérez tous vos rendez-vous",
+				"two": "Mises à jour automatiques du statut des réservations",
+				"three": "Mises à jour de disponibilité en temps réel",
+				"four": "Interface de calendrier intuitive"
+			},
+			"client": {
+				"title": "Gestion des clients",
+				"description": "Suivez vos relations clients dans un espace organisé.",
+				"one": "Historique des consultations pour chaque client",
+				"two": "Consultez et gérez tous vos clients",
+				"three": "Accès facile aux coordonnées des clients",
+				"four": "Suivi flexible du statut des rendez-vous"
+			},
+			"profile": {
+				"title": "Profil professionnel",
+				"description": "Renforcez votre présence en ligne et démontrez votre expertise.",
+				"one": "Mettez en valeur votre expertise et vos certifications",
+				"two": "Support multilingue",
+				"three": "Disponibilité personnalisable par emplacement",
+				"four": "Définissez vos frais de consultation"
+			},
+			"availability": {
+				"title": "Contrôle de la disponibilité",
+				"description": "Prenez le plein contrôle de votre horaire avec des options flexibles.",
+				"one": "Gestion flexible des créneaux horaires",
+				"two": "Définissez la durée des rencontres",
+				"three": "Gérez vos jours de congé et vos vacances",
+				"four": "Créez des plages horaires personnalisées pour chaque jour"
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"features": {
+		"badge": "Features",
+		"title": "Streamline Your Legal Practice",
+		"subtitle": "Elevate your legal services with our intuitive platform designed for modern lawyers. Manage appointments, showcase your expertise, and grow your practice - all in one place.",
+		"cards": {
+			"schedule": {
+				"title": "Smart Scheduling System",
+				"description": "Manage your appointments with ease, ensuring that you never miss a session again.",
+				"one": "View and manage all your appointments",
+				"two": "Automated status updates for bookings",
+				"three": "Real-time availability updates",
+				"four": "intuitive calendar interface"
+			},
+			"client": {
+				"title": "Client Management",
+				"description": "Keep track of your client relationships in one organized place",
+				"one": "Track consultation history with each client",
+				"two": "View and manage all your clients",
+				"three": "Easy access to client contact information",
+				"four": "Flexible appointment status tracking"
+			},
+			"profile": {
+				"title": "Professional Profile",
+				"description": "Build a strong online presence that showcases your expertise",
+				"one": "Showcase your expertise and credentials",
+				"two": "Multiple language support",
+				"three": "Customizable availability by location",
+				"four": "Set your consultation fees"
+			},
+			"availability": {
+				"title": "Availability Control",
+				"description": "Take full control of your schedule with flexible availability options",
+				"one": "Flexible time slot management",
+				"two": "Define specific meeting durations",
+				"three": "Manage off days and holidays",
+				"four": "Set custom schedule blocks for each day"
+			}
+		}
+	}
+}

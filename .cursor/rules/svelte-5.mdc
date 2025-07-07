@@ -1,0 +1,5 @@
+---
+description: use svelte mcp to grab svelte 5 syntax
+globs:
+alwaysApply: false
+---
