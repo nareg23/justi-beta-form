@@ -112,8 +112,6 @@
 	const otherSpecialization = $derived.by(() => {
 		return !!triggeredSpecializations?.find((s) => s?.value === 'other') || false;
 	});
-
-	$inspect($formData);
 </script>
 
 <div class="relative">
