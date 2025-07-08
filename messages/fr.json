@@ -248,6 +248,11 @@
 				"tooShort": "La description doit contenir au moins 2 caractères",
 				"tooLong": "La description doit contenir moins de 100 caractères"
 			}
+		},
+		"submitting": "Soumission de votre candidature...",
+		"submission": {
+			"error": "L'envoi du formulaire a échoué. Veuillez réessayer plus tard.",
+			"success": "Merci pour votre candidature ! Nous vous contacterons bientôt."
 		}
 	}
 }

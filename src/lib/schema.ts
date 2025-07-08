@@ -23,6 +23,11 @@ export const referralSources = [
 		fr_label: 'Événement'
 	},
 	{
+		label: 'Email',
+		value: 'Email',
+		fr_label: 'Email'
+	},
+	{
 		label: 'Other',
 		value: 'Other',
 		fr_label: 'Autre'
@@ -107,9 +112,13 @@ export const formSchema = z.object({
 		.string({
 			invalid_type_error: m['form.errors.website.invalid']()
 		})
-		.url(m['form.errors.website.invalid']())
-		.startsWith('https://', m['form.errors.website.https']())
+		.refine((val) => val === '' || val.startsWith('https://'), m['form.errors.website.https']())
+		.refine(
+			(val) => val === '' || z.string().url().safeParse(val).success,
+			m['form.errors.website.invalid']()
+		)
 		.optional(),
+
 	referralSource: z.enum(referralSources.map((source) => source.value) as [string, ...string[]], {
 		required_error: m['form.errors.referralSource.required'](),
 		invalid_type_error: m['form.errors.referralSource.invalid']()

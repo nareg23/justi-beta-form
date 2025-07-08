@@ -248,6 +248,11 @@
 				"tooShort": "Description must be at least 2 characters",
 				"tooLong": "Description must be less than 100 characters"
 			}
+		},
+		"submitting": "Submitting your application...",
+		"submission": {
+			"error": "Form submission failed. Please try again later.",
+			"success": "Thank you for your application! We'll be in touch soon."
 		}
 	}
 }

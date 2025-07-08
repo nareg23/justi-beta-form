@@ -3,6 +3,8 @@ import { message, superValidate } from 'sveltekit-superforms';
 import { formSchema } from '../lib/schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
+import { saveForm } from '$lib/server/save-form';
+import { m } from '$lib/paraglide/messages';
 
 const fetchSpecializations = async () => {
 	try {
@@ -61,13 +63,28 @@ export const load = (async () => {
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const form = await superValidate(request, zod(formSchema));
-		if (form.valid) {
-			// Here you could save the data to a database or send an email
+
+		if (!form.valid) {
+			return message(
+				form,
+				{
+					text: m['form.submission.error'](),
+					type: 'error'
+				},
+				{ status: 400 }
+			);
+		}
+		const saved = await saveForm(form.data);
+		if (!saved) {
 			return message(form, {
-				message: 'Form submitted successfully',
-				type: 'success'
+				text: m['form.submission.error'](),
+				type: 'error'
 			});
 		}
-		return { form };
+
+		return message(form, {
+			text: m['form.submission.success'](),
+			type: 'success'
+		});
 	}
 };

@@ -34,9 +34,9 @@
 	const { locationsAndSpecializations } = data;
 
 	const form = superForm(data.form, {
-		validators: zodClient(formSchema)
+		validators: zodClient(formSchema),
+		multipleSubmits: 'prevent'
 	});
-	const { form: formData, enhance } = form;
 
 	type FeatureColor = 'schedule' | 'client' | 'profile' | 'availability';
 
@@ -144,6 +144,13 @@
 		}
 	];
 </script>
+
+<svelte:head>
+	<title>JustiConnect | Beta Signup</title>
+	<meta name="description" content="JustiConnect | Beta Signup" />
+	<meta name="keywords" content="JustiConnect, Beta Signup, JustiConnect Beta Signup" />
+	<meta name="author" content="JustiConnect" />
+</svelte:head>
 
 <!-- More sophisticated gradient background -->
 <div class="relative min-h-screen bg-gradient-to-b from-[#f8faff] via-[#fcfdff] to-white">
@@ -359,7 +366,7 @@
 				</p>
 			</div>
 
-			<BetaSignupForm {form} {formData} {enhance} {locationsAndSpecializations} />
+			<BetaSignupForm {form} {locationsAndSpecializations} />
 
 			<div class="mt-8 space-y-4">
 				<div class="flex items-center justify-between text-sm">
