@@ -122,7 +122,8 @@ export const formSchema = z.object({
 	referralSource: z.enum(referralSources.map((source) => source.value) as [string, ...string[]], {
 		required_error: m['form.errors.referralSource.required'](),
 		invalid_type_error: m['form.errors.referralSource.invalid']()
-	})
+	}),
+	captchaToken: z.string({})
 });
 
 export type FormSchema = z.infer<typeof formSchema>;

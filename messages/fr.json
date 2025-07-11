@@ -51,8 +51,8 @@
 		"hero": {
 			"title": "Élevez votre pratique juridique",
 			"subtitle": "Rejoignez un réseau exclusif de professionnels du droit avant-gardistes qui façonnent l'avenir de l'engagement client",
-			"cta": "Accès anticipé",
-			"trust_badge": "Approuvé par les cabinets d'avocats leaders"
+			"cta": "Accès Beta",
+			"trust_badge": "Conçu en collaboration avec des professionnels du droit"
 		},
 		"coming_soon": {
 			"badge": "À venir",
@@ -100,7 +100,7 @@
 					"description": "Gardez votre cabinet organisé avec le suivi intégré des dossiers, la gestion des échéances et l'organisation des documents."
 				}
 			},
-			"early_access": "Accès anticipé prévu pour Q2 2024"
+			"early_access": "Accès anticipé prévu pour Q4 2025"
 		},
 		"beta": {
 			"title": "Rejoignez la bêta de JustiConnect",
@@ -173,15 +173,29 @@
 		"submit": "Soumettre la candidature",
 		"footer": {
 			"copyright": "© {year} JustiConnect. Tous droits réservés.",
-			"madeIn": "Fait avec 🍁 au Canada",
+			"madeIn": "Fait au Canada 🍁 ",
 			"contact": {
 				"question": "Des questions ?",
 				"email": "Contactez-nous à support@justiconnect.com"
 			}
 		},
 		"nda": {
-			"title": "Accord de confidentialité et conditions de la version bêta",
-			"close": "Fermer"
+			"title": "Accord de confidentialité et conditions bêta",
+			"close": "Fermer",
+			"description": "Veuillez lire attentivement notre accord de confidentialité et les conditions de test bêta avant de continuer.",
+			"intro": "En participant au programme bêta de JustiConnect, vous acceptez de maintenir la confidentialité de toutes les informations partagées pendant la période de test bêta. Cela inclut, sans s'y limiter :",
+			"items": {
+				"features": "Fonctionnalités de la plateforme",
+				"technical": "Spécifications techniques et détails d'implémentation",
+				"ui": "Conceptions d'interface utilisateur et flux de travail",
+				"metrics": "Métriques de performance et résultats des tests",
+				"roadmap": "Plans de développement futurs et feuille de route"
+			},
+			"conclusion": "Vos commentaires et votre participation sont essentiels pour améliorer JustiConnect. Nous apprécions votre engagement à nous aider à construire une meilleure plateforme tout en maintenant la confidentialité.",
+			"buttons": {
+				"decline": "Refuser",
+				"accept": "Accepter les conditions"
+			}
 		},
 		"errors": {
 			"firstName": {
@@ -247,6 +261,13 @@
 				"invalid": "Description de spécialisation invalide",
 				"tooShort": "La description doit contenir au moins 2 caractères",
 				"tooLong": "La description doit contenir moins de 100 caractères"
+			},
+			"captcha": {
+				"required": "Veuillez compléter la vérification captcha",
+				"invalid": "La vérification captcha a échoué. Veuillez réessayer"
+			},
+			"captchaToken": {
+				"required": "Veuillez compléter la vérification captcha"
 			}
 		},
 		"submitting": "Soumission de votre candidature...",

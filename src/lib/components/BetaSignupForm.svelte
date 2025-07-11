@@ -3,6 +3,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { referralSources } from '$lib/schema.js';
+	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 	import {
 		UserCircle,
 		Briefcase,
@@ -37,6 +38,7 @@
 				otherSpecialization?: string | undefined;
 				firmName?: string | undefined;
 				website?: string | undefined;
+				captchaToken: string;
 			},
 			any
 		>;
@@ -51,7 +53,7 @@
 
 	let { form, locationsAndSpecializations }: Props = $props();
 
-	const { message, form: formData, enhance, submitting } = form;
+	const { message, form: formData, enhance, submitting, submit, delayed } = form;
 
 	const {
 		locations: { cities, provinces },
@@ -112,10 +114,37 @@
 	const otherSpecialization = $derived.by(() => {
 		return !!triggeredSpecializations?.find((s) => s?.value === 'other') || false;
 	});
+
+	const handleSubmit = async (e: Event) => {
+		e.preventDefault();
+
+		try {
+			await new Promise<void>((resolve) => {
+				window.grecaptcha.ready(() => resolve());
+			});
+
+			const token = await window.grecaptcha.execute(PUBLIC_CAPTCHA_SITE_KEY, {
+				action: 'register'
+			});
+
+			$formData.captchaToken = token;
+		} catch (error) {
+			return ($message = { text: m['form.errors.captchaToken.required'](), type: 'error' });
+		}
+		submit();
+	};
 </script>
 
+<svelte:head>
+	<script
+		src="https://www.google.com/recaptcha/api.js?render={PUBLIC_CAPTCHA_SITE_KEY}"
+		async
+		defer
+	></script>
+</svelte:head>
+
 <div class="relative">
-	{#if $submitting}
+	{#if $submitting || $delayed}
 		<div
 			class="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm"
 		>
@@ -152,6 +181,7 @@
 	{/if}
 
 	<form method="POST" use:enhance class="space-y-12">
+		<input type="hidden" name="captchaToken" bind:value={$formData.captchaToken} />
 		<!-- Personal Information -->
 		<div class="space-y-8">
 			<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
@@ -563,7 +593,7 @@
 		</div>
 
 		<Button
-			type="submit"
+			onclick={handleSubmit}
 			disabled={$submitting}
 			class={cn(
 				'relative w-full py-7 text-lg font-semibold',

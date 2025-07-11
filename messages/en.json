@@ -52,7 +52,7 @@
 			"title": "Elevate Your Legal Practice",
 			"subtitle": "Join an exclusive network of forward-thinking legal professionals shaping the future of client engagement",
 			"cta": "Get Early Access",
-			"trust_badge": "Trusted by Leading Law Firms"
+			"trust_badge": "Built in Collaboration with Legal Professionals"
 		},
 		"coming_soon": {
 			"badge": "Coming Soon",
@@ -100,7 +100,7 @@
 					"description": "Keep your practice organized with integrated case tracking, deadline management, and document organization."
 				}
 			},
-			"early_access": "Early Access Coming Q2 2024"
+			"early_access": "Early Access Coming Q4 2025"
 		},
 		"beta": {
 			"title": "Join the JustiConnect Beta",
@@ -173,7 +173,7 @@
 		"submit": "Submit Application",
 		"footer": {
 			"copyright": "© {year} JustiConnect. All rights reserved.",
-			"madeIn": "Made with 🍁 in Canada",
+			"madeIn": "Made in Canada 🍁 ",
 			"contact": {
 				"question": "Have questions?",
 				"email": "Contact us at support@justiconnect.com"
@@ -181,7 +181,21 @@
 		},
 		"nda": {
 			"title": "NDA & Beta Terms",
-			"close": "Close"
+			"close": "Close",
+			"description": "Please review our Non-Disclosure Agreement and Beta Testing Terms carefully before proceeding.",
+			"intro": "By participating in the JustiConnect Beta Program, you agree to maintain the confidentiality of all information shared during the beta testing period. This includes but is not limited to:",
+			"items": {
+				"features": "Platform features and functionality",
+				"technical": "Technical specifications and implementation details",
+				"ui": "User interface designs and workflows",
+				"metrics": "Performance metrics and testing results",
+				"roadmap": "Future development plans and roadmap"
+			},
+			"conclusion": "Your feedback and participation are crucial for improving JustiConnect. We appreciate your commitment to helping us build a better platform while maintaining confidentiality.",
+			"buttons": {
+				"decline": "Decline",
+				"accept": "Accept Terms"
+			}
 		},
 		"errors": {
 			"firstName": {
@@ -247,6 +261,13 @@
 				"invalid": "Invalid specialization description",
 				"tooShort": "Description must be at least 2 characters",
 				"tooLong": "Description must be less than 100 characters"
+			},
+			"captcha": {
+				"required": "Please complete the captcha verification",
+				"invalid": "Captcha verification failed. Please try again"
+			},
+			"captchaToken": {
+				"required": "Please complete the captcha verification"
 			}
 		},
 		"submitting": "Submitting your application...",

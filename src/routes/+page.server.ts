@@ -5,6 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { supabaseAdmin } from '$lib/server/supabase-admin';
 import { saveForm } from '$lib/server/save-form';
 import { m } from '$lib/paraglide/messages';
+import { verifyCaptcha } from '$lib/server/captcha';
 
 const fetchSpecializations = async () => {
 	try {
@@ -74,6 +75,15 @@ export const actions: Actions = {
 				{ status: 400 }
 			);
 		}
+
+		const { success, score } = await verifyCaptcha(form.data.captchaToken);
+		if (!success || (score && score < 0.5)) {
+			return message(form, {
+				text: m['form.errors.captchaToken.required'](),
+				type: 'error'
+			});
+		}
+
 		const saved = await saveForm(form.data);
 		if (!saved) {
 			return message(form, {

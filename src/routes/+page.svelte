@@ -35,7 +35,8 @@
 
 	const form = superForm(data.form, {
 		validators: zodClient(formSchema),
-		multipleSubmits: 'prevent'
+		multipleSubmits: 'prevent',
+		delayMs: 1000
 	});
 
 	type FeatureColor = 'schedule' | 'client' | 'profile' | 'availability';
@@ -145,18 +146,6 @@
 	];
 </script>
 
-<svelte:head>
-	<title>JustiConnect | Beta Signup</title>
-	<meta name="description" content="JustiConnect | Beta Signup" />
-	<meta name="keywords" content="JustiConnect, Beta Signup, JustiConnect Beta Signup" />
-	<meta name="author" content="JustiConnect" />
-	<script
-		defer
-		src="https://analytics.nariano.com/script.js"
-		data-website-id="b23e9a45-1b43-48d7-b6e1-9b1d8bd25977"
-	></script>
-</svelte:head>
-
 <!-- More sophisticated gradient background -->
 <div class="relative min-h-screen bg-gradient-to-b from-[#f8faff] via-[#fcfdff] to-white">
 	<!-- Language Selector -->
@@ -194,9 +183,7 @@
 	</div>
 
 	<!-- Hero Section with refined colors -->
-	<header
-		class="relative container mx-auto flex flex-col items-center px-6 py-24 text-center lg:py-32"
-	>
+	<header class="relative container mx-auto flex flex-col items-center px-6 text-center lg:py-20">
 		<!-- Logo with subtle animation -->
 		<div class="group relative flex h-fit max-w-lg items-center justify-center">
 			<div
@@ -273,7 +260,7 @@
 	</header>
 
 	<!-- Feature Cards Section with refined styling -->
-	<section class="container mx-auto px-6 py-16">
+	<section class="container mx-auto px-6 py-12">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
 			{#each features as feature}
 				<div
@@ -305,7 +292,7 @@
 	</section>
 
 	<!-- Coming Soon Section -->
-	<section class="relative container mx-auto px-6 py-24">
+	<section class="relative container mx-auto px-6 py-12">
 		<div
 			class="via-primary/5 absolute inset-0 bg-gradient-to-b from-transparent to-transparent"
 		></div>
@@ -357,7 +344,7 @@
 	<!-- Beta Signup Form Card with refined styling -->
 	<main
 		id="signup-form"
-		class="container mx-auto flex flex-1 flex-col items-center justify-center px-6 py-24"
+		class="container mx-auto flex flex-1 flex-col items-center justify-center px-6 pt-8 pb-24"
 	>
 		<div
 			class="w-full max-w-5xl rounded-2xl bg-white/80 p-12 shadow-xl backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-2xl"
