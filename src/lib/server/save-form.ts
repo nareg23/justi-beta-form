@@ -1,4 +1,5 @@
 import { PRIVATE_CMS_URL } from '$env/static/private';
+import { getLocale } from '$lib/paraglide/runtime';
 
 type FormSchema = {
 	firstName: string;
@@ -29,12 +30,13 @@ export const saveForm = async (form: FormSchema): Promise<boolean> => {
 				...form,
 				specializations: form.specializations.map((s) => ({
 					specialization: s
-				}))
+				})),
+				selected_language: getLocale()
 			})
 		});
-		if (!res.ok) {
-			throw new Error('Failed to save form');
-		}
+		// if (!res.ok) {
+		// 	throw new Error('Failed to save form');
+		// }
 		const data = await res.json();
 		console.log(data);
 		return true;
