@@ -123,7 +123,7 @@ export const formSchema = z.object({
 		required_error: m['form.errors.referralSource.required'](),
 		invalid_type_error: m['form.errors.referralSource.invalid']()
 	}),
-	captchaToken: z.string({})
+	captchaToken: z.string().nonempty()
 });
 
 export type FormSchema = z.infer<typeof formSchema>;

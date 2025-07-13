@@ -76,10 +76,11 @@ export const actions: Actions = {
 			);
 		}
 
-		const { success, score } = await verifyCaptcha(form.data.captchaToken);
+		const { success, score, message: captchaMessage } = await verifyCaptcha(form.data.captchaToken);
+
 		if (!success || (score && score < 0.5)) {
 			return message(form, {
-				text: m['form.errors.captchaToken.required'](),
+				text: captchaMessage,
 				type: 'error'
 			});
 		}

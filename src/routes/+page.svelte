@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 	import type { PageData } from './$types.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { formSchema } from '../lib/schema.js';
@@ -36,6 +37,7 @@
 	const form = superForm(data.form, {
 		validators: zodClient(formSchema),
 		multipleSubmits: 'prevent',
+		resetForm: false,
 		delayMs: 1000
 	});
 
@@ -147,6 +149,13 @@
 </script>
 
 <!-- More sophisticated gradient background -->
+<svelte:head>
+	<script
+		src="https://www.google.com/recaptcha/api.js?render={PUBLIC_CAPTCHA_SITE_KEY}"
+		async
+		defer
+	></script>
+</svelte:head>
 <div class="relative min-h-screen bg-gradient-to-b from-[#f8faff] via-[#fcfdff] to-white">
 	<!-- Language Selector -->
 	<div

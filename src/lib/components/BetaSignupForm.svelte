@@ -115,9 +115,7 @@
 		return !!triggeredSpecializations?.find((s) => s?.value === 'other') || false;
 	});
 
-	const handleSubmit = async (e: Event) => {
-		e.preventDefault();
-
+	const generateCaptchaToken = async () => {
 		try {
 			await new Promise<void>((resolve) => {
 				window.grecaptcha.ready(() => resolve());
@@ -131,17 +129,15 @@
 		} catch (error) {
 			return ($message = { text: m['form.errors.captchaToken.required'](), type: 'error' });
 		}
+	};
+
+	const handleSubmit = async (e: Event) => {
+		e.preventDefault();
+		await generateCaptchaToken();
 		submit();
 	};
+	$inspect($formData);
 </script>
-
-<svelte:head>
-	<script
-		src="https://www.google.com/recaptcha/api.js?render={PUBLIC_CAPTCHA_SITE_KEY}"
-		async
-		defer
-	></script>
-</svelte:head>
 
 <div class="relative">
 	{#if $submitting || $delayed}
