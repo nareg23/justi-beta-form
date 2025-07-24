@@ -10,11 +10,7 @@ type FormSchema = {
 	city: string;
 	specializations: string[];
 	otherSpecialization?: string;
-	yearsPractice: number;
-	firmName?: string;
 	agreeBeta: true;
-	website?: string;
-	referralSource: string;
 };
 
 export const saveForm = async (form: FormSchema): Promise<boolean> => {
@@ -34,11 +30,11 @@ export const saveForm = async (form: FormSchema): Promise<boolean> => {
 				selected_language: getLocale()
 			})
 		});
-		// if (!res.ok) {
-		// 	throw new Error('Failed to save form');
-		// }
-		const data = await res.json();
-		console.log(data);
+		if (!res.ok) {
+			const data = await res.json();
+			console.log(data);
+			throw new Error('Failed to save form');
+		}
 		return true;
 	} catch (err) {
 		console.log(err);

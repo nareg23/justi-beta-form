@@ -49,8 +49,8 @@
 			"innovation": "Innovation en technologie juridique"
 		},
 		"hero": {
-			"title": "Élevez votre pratique juridique",
-			"subtitle": "Rejoignez un réseau exclusif de professionnels du droit avant-gardistes qui façonnent l'avenir de l'engagement client",
+			"title": "Plus de Clients. Moins d'Administration.",
+			"subtitle": "Plateforme de génération de prospects pour avocats canadiens.",
 			"cta": "Accès Beta",
 			"trust_badge": "Conçu en collaboration avec des professionnels du droit"
 		},
@@ -105,6 +105,59 @@
 		"beta": {
 			"title": "Rejoignez la bêta de JustiConnect",
 			"subtitle": "Connectez-vous avec des avocats innovants. Façonnez l'avenir de la technologie juridique."
+		},
+		"urgency": {
+			"limitedAccess": "Accès Bêta Limité",
+			"spotsAvailable": "Seulement 200 places disponibles",
+			"applyNow": "Postulez maintenant"
+		},
+		"header": {
+			"title": "JustiConnect Bêta",
+			"subtitle": "Plateforme de Génération de Prospects pour Avocats Canadiens"
+		},
+		"benefits": {
+			"title": "Avantages Clés",
+			"qualified": {
+				"title": "Clients qualifiés livrés",
+				"description": "nous promouvons activement votre profil et vous envoyons des prospects prêts à embaucher correspondant à votre domaine de pratique."
+			},
+			"freeBeta": {
+				"title": "Gratuit pendant la bêta",
+				"description": "testez toutes les fonctionnalités sans frais maintenant, et qualifiez-vous pour une remise exclusive d'adopteur précoce sur le plan mensuel post-lancement"
+			},
+			"management": {
+				"title": "Gestion transparente des clients et réservations",
+				"description": "acceptez les demandes de consultation, synchronisez les calendriers et suivez chaque dossier depuis un tableau de bord intuitif."
+			}
+		},
+		"earlyAdopter": {
+			"title": "Avantages Adopteur Précoce",
+			"freeAccess": "Accès bêta gratuit",
+			"exclusiveDiscount": "Remise exclusive",
+			"prioritySupport": "Support prioritaire"
+		},
+		"howItWorks": {
+			"title": "Comment Ça Fonctionne",
+			"step1": "Nous promouvons votre profil",
+			"step2": "Les clients demandent des consultations",
+			"step3": "Vous acceptez et facturez"
+		},
+		"testimonial": {
+			"quote": "8 prospects qualifiés en un mois. Trois sont devenus clients.",
+			"author": "Sarah Chen, Droit de la Famille"
+		},
+		"faq": {
+			"title": "Questions Fréquemment Posées",
+			"whatWillItCostAfterBeta": "Combien cela coûtera-t-il après la bêta ?",
+			"whatWillItCostAfterBetaDescription": "Les prix seront annoncés plus près du lancement. Les participants à la bêta recevront des remises exclusives d'adopteur précoce sur nos plans d'abonnement mensuel.",
+			"doIKeepFullOwnershipOfMyClients": "Est-ce que je garde la pleine propriété de mes clients ?",
+			"doIKeepFullOwnershipOfMyClientsDescription": "Oui, à 100%. Une fois qu'un client vous contacte via notre plateforme, cette relation vous appartient entièrement. Nous n'interférons jamais avec vos relations clients.",
+			"canICancelAtAnyTime": "Puis-je annuler à tout moment ?",
+			"canICancelAtAnyTimeDescription": "Absolument. Il n'y a pas de contrats à long terme ou de frais d'annulation. Vous pouvez suspendre ou annuler votre abonnement à tout moment avec un préavis de 30 jours."
+		},
+		"signupCard": {
+			"title": "Postuler pour l'Accès Bêta",
+			"subtitle": "Rejoignez la liste d'attente • Gratuit pendant la bêta"
 		}
 	},
 	"form": {
@@ -161,10 +214,6 @@
 				}
 			},
 			"additional": {
-				"title": "Informations supplémentaires",
-				"referralSource": {
-					"label": "Comment avez-vous entendu parler de nous ?"
-				},
 				"agreeBeta": {
 					"label": "J'accepte l'accord de confidentialité et les conditions de la version bêta"
 				}

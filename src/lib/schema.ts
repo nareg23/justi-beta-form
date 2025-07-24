@@ -1,39 +1,6 @@
 import { z } from 'zod';
 import { m } from './paraglide/messages';
 
-export const referralSources = [
-	{
-		label: 'Google',
-		value: 'Google',
-		fr_label: 'Google'
-	},
-	{
-		label: 'LinkedIn',
-		value: 'LinkedIn',
-		fr_label: 'LinkedIn'
-	},
-	{
-		label: 'Colleague',
-		value: 'Colleague',
-		fr_label: 'Collègue'
-	},
-	{
-		label: 'Event',
-		value: 'Event',
-		fr_label: 'Événement'
-	},
-	{
-		label: 'Email',
-		value: 'Email',
-		fr_label: 'Email'
-	},
-	{
-		label: 'Other',
-		value: 'Other',
-		fr_label: 'Autre'
-	}
-] as const;
-
 export const formSchema = z.object({
 	firstName: z
 		.string({
@@ -91,38 +58,11 @@ export const formSchema = z.object({
 		.min(2, m['form.errors.otherSpecialization.tooShort']())
 		.max(100, m['form.errors.otherSpecialization.tooLong']())
 		.optional(),
-	yearsPractice: z
-		.number({
-			required_error: m['form.errors.yearsPractice.required'](),
-			invalid_type_error: m['form.errors.yearsPractice.invalid']()
-		})
-		.int(m['form.errors.yearsPractice.integer']())
-		.min(0, m['form.errors.yearsPractice.min']())
-		.max(70, m['form.errors.yearsPractice.max']()),
-	firmName: z
-		.string({
-			invalid_type_error: m['form.errors.firmName.invalid']()
-		})
-		.max(100, m['form.errors.firmName.tooLong']())
-		.optional(),
+
 	agreeBeta: z.literal(true, {
 		errorMap: () => ({ message: m['form.errors.agreeBeta.required']() })
 	}), // I accept the NDA & Beta Terms
-	website: z
-		.string({
-			invalid_type_error: m['form.errors.website.invalid']()
-		})
-		.refine((val) => val === '' || val.startsWith('https://'), m['form.errors.website.https']())
-		.refine(
-			(val) => val === '' || z.string().url().safeParse(val).success,
-			m['form.errors.website.invalid']()
-		)
-		.optional(),
 
-	referralSource: z.enum(referralSources.map((source) => source.value) as [string, ...string[]], {
-		required_error: m['form.errors.referralSource.required'](),
-		invalid_type_error: m['form.errors.referralSource.invalid']()
-	}),
 	captchaToken: z.string().nonempty()
 });
 

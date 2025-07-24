@@ -49,8 +49,8 @@
 			"innovation": "Legal Tech Innovation"
 		},
 		"hero": {
-			"title": "Elevate Your Legal Practice",
-			"subtitle": "Join an exclusive network of forward-thinking legal professionals shaping the future of client engagement",
+			"title": "More Clients. Less Admin.",
+			"subtitle": "Lead generation platform for Canadian lawyers.",
 			"cta": "Get Early Access",
 			"trust_badge": "Built in Collaboration with Legal Professionals"
 		},
@@ -105,6 +105,59 @@
 		"beta": {
 			"title": "Join the JustiConnect Beta",
 			"subtitle": "Connect with forward-thinking lawyers. Shape the future of legal technology."
+		},
+		"urgency": {
+			"limitedAccess": "Limited Beta Access",
+			"spotsAvailable": "Only 200 spots available",
+			"applyNow": "Apply now"
+		},
+		"header": {
+			"title": "JustiConnect Beta",
+			"subtitle": "Lead Generation Platform for Canadian Lawyers"
+		},
+		"benefits": {
+			"title": "Key Benefits",
+			"qualified": {
+				"title": "Qualified clients delivered",
+				"description": "we actively promote your profile and send you ready‑to‑hire leads matched to your practice area."
+			},
+			"freeBeta": {
+				"title": "Free during beta",
+				"description": "test every feature at no cost now, and qualify for an exclusive early‑adopter discount on the post‑launch monthly plan"
+			},
+			"management": {
+				"title": "Seamless client & booking management",
+				"description": "accept consultation requests, sync calendars, and track every matter from one intuitive dashboard."
+			}
+		},
+		"earlyAdopter": {
+			"title": "Early Adopter Benefits",
+			"freeAccess": "Free beta access",
+			"exclusiveDiscount": "Exclusive discount",
+			"prioritySupport": "Priority support"
+		},
+		"howItWorks": {
+			"title": "How It Works",
+			"step1": "We promote your profile",
+			"step2": "Clients request consultations",
+			"step3": "You accept and bill"
+		},
+		"testimonial": {
+			"quote": "8 qualified leads in my first month. Three became clients.",
+			"author": "Sarah Chen, Family Law"
+		},
+		"faq": {
+			"title": "Frequently Asked Questions",
+			"whatWillItCostAfterBeta": "What will it cost after beta?",
+			"whatWillItCostAfterBetaDescription": "Pricing will be announced closer to launch. Beta participants will receive exclusive early adopter discounts on our monthly subscription plans.",
+			"doIKeepFullOwnershipOfMyClients": "Do I keep full ownership of my clients?",
+			"doIKeepFullOwnershipOfMyClientsDescription": "Yes, 100%. Once a client contacts you through our platform, that relationship belongs entirely to you. We never interfere with your client relationships.",
+			"canICancelAtAnyTime": "Can I cancel at any time?",
+			"canICancelAtAnyTimeDescription": "Absolutely. There are no long-term contracts or cancellation fees. You can pause or cancel your subscription at any time with 30 days notice."
+		},
+		"signupCard": {
+			"title": "Apply for Beta Access",
+			"subtitle": "Join the waitlist • Free during beta period"
 		}
 	},
 	"form": {
@@ -161,10 +214,6 @@
 				}
 			},
 			"additional": {
-				"title": "Additional Information",
-				"referralSource": {
-					"label": "How did you hear about us?"
-				},
 				"agreeBeta": {
 					"label": "I accept the NDA & Beta Terms"
 				}

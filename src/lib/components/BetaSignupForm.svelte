@@ -2,17 +2,8 @@
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
-	import { referralSources } from '$lib/schema.js';
 	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
-	import {
-		UserCircle,
-		Briefcase,
-		Info,
-		X,
-		Loader2,
-		CheckCircle2,
-		AlertCircle
-	} from 'lucide-svelte';
+	import { X, Loader2, CheckCircle2, AlertCircle } from 'lucide-svelte';
 	import type { Database } from '$lib/types/supabase';
 	import Badge from './ui/badge/badge.svelte';
 	import { cn } from '$lib/utils';
@@ -32,12 +23,8 @@
 				phone: string;
 				province: string;
 				city: string;
-				yearsPractice: number;
-				referralSource: string;
 				agreeBeta: true;
 				otherSpecialization?: string | undefined;
-				firmName?: string | undefined;
-				website?: string | undefined;
 				captchaToken: string;
 			},
 			any
@@ -61,9 +48,8 @@
 	} = locationsAndSpecializations;
 
 	const inputClasses =
-		'w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20';
-	const labelClasses = 'text-sm font-medium text-gray-700 mb-1.5';
-	const descriptionClasses = 'mt-1.5 text-sm text-gray-500';
+		'w-full rounded-md border border-input bg-background px-3 py-2 text-sm transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary';
+	const labelClasses = 'text-sm font-medium text-foreground';
 
 	const isEnglish = getLocale() === 'en';
 	let showNdaModal = $state(false);
@@ -90,8 +76,8 @@
 		}
 		return {
 			id: '',
-			label: 'Select your province',
-			fr_label: 'Sélectionnez votre province',
+			label: 'Select province',
+			fr_label: 'Sélectionnez la province',
 			value: ''
 		};
 	});
@@ -104,8 +90,8 @@
 			return cities.find((c) => c.value === $formData.city);
 		}
 		return {
-			label: 'Select your city',
-			fr_label: 'Sélectionnez votre ville',
+			label: 'Select city',
+			fr_label: 'Sélectionnez la ville',
 			value: '',
 			id: ''
 		};
@@ -136,491 +122,311 @@
 		await generateCaptchaToken();
 		submit();
 	};
-	$inspect($formData);
 </script>
 
 <div class="relative">
 	{#if $submitting || $delayed}
 		<div
-			class="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm"
+			class="bg-background/80 absolute inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
 		>
-			<div class="flex flex-col items-center gap-3">
-				<Loader2 class="text-primary h-8 w-8 animate-spin" />
-				<p class="text-primary/80 font-medium">{m['form.submitting']()}</p>
+			<div class="flex flex-col items-center gap-2">
+				<Loader2 class="text-primary h-6 w-6 animate-spin" />
+				<p class="text-muted-foreground text-sm font-medium">{m['form.submitting']()}</p>
 			</div>
 		</div>
 	{/if}
 
 	{#if $message}
-		<div class="animate-in fade-in slide-in-from-top-4 sticky top-4 z-40 mb-6 duration-300">
+		<div class="mb-4">
 			<div
-				class="flex items-start gap-3 rounded-lg border p-4 shadow-lg"
-				class:border-red-200={$message.type === 'error'}
-				class:bg-red-50={$message.type === 'error'}
-				class:border-green-200={$message.type === 'success'}
-				class:bg-green-50={$message.type === 'success'}
+				class={cn(
+					'flex items-start gap-2 rounded-md border p-3 text-sm',
+					$message.type === 'error' && 'border-destructive bg-destructive/5 text-destructive',
+					$message.type === 'success' && 'border-primary bg-primary/5 text-primary'
+				)}
 			>
 				{#if $message.type === 'error'}
-					<AlertCircle class="h-5 w-5 flex-shrink-0 text-red-600" />
+					<AlertCircle class="h-4 w-4 flex-shrink-0" />
 				{:else}
-					<CheckCircle2 class="h-5 w-5 flex-shrink-0 text-green-600" />
+					<CheckCircle2 class="h-4 w-4 flex-shrink-0" />
 				{/if}
-				<p
-					class="text-sm font-medium"
-					class:text-red-700={$message.type === 'error'}
-					class:text-green-700={$message.type === 'success'}
-				>
-					{$message.text}
-				</p>
+				<p class="font-medium">{$message.text}</p>
 			</div>
 		</div>
 	{/if}
 
-	<form method="POST" use:enhance class="space-y-12">
+	<form method="POST" use:enhance class="space-y-4">
 		<input type="hidden" name="captchaToken" bind:value={$formData.captchaToken} />
-		<!-- Personal Information -->
-		<div class="space-y-8">
-			<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
-				<UserCircle class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-semibold">{m['form.sections.personal.title']()}</h2>
-			</div>
-			<div class="grid gap-8 md:grid-cols-2">
-				<Form.Field {form} name="firstName">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.personal.firstName.label']()}</Form.Label
-							>
-							<Input {...props} class={inputClasses} bind:value={$formData.firstName} />
-						{/snippet}
-					</Form.Control>
-					<Form.Description class={descriptionClasses}
-						>{m['form.sections.personal.firstName.description']()}</Form.Description
-					>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
 
-				<Form.Field {form} name="lastName">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.personal.lastName.label']()}</Form.Label
-							>
-							<Input {...props} class={inputClasses} bind:value={$formData.lastName} />
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			</div>
-
-			<div class="grid gap-8 md:grid-cols-2">
-				<Form.Field {form} name="email">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.personal.email.label']()}</Form.Label
-							>
-							<Input type="email" {...props} class={inputClasses} bind:value={$formData.email} />
-						{/snippet}
-					</Form.Control>
-					<Form.Description class={descriptionClasses}
-						>{m['form.sections.personal.email.description']()}</Form.Description
-					>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-
-				<Form.Field {form} name="phone">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.personal.phone.label']()}</Form.Label
-							>
-							<Input type="tel" {...props} class={inputClasses} bind:value={$formData.phone} />
-						{/snippet}
-					</Form.Control>
-					<Form.Description class={descriptionClasses}
-						>{m['form.sections.personal.phone.description']()}</Form.Description
-					>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			</div>
-		</div>
-
-		<!-- Professional Information -->
-		<div class="space-y-8">
-			<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
-				<Briefcase class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-semibold">{m['form.sections.professional.title']()}</h2>
-			</div>
-			<div class="grid gap-8 md:grid-cols-2">
-				<Form.Field {form} name="province">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.professional.province.label']()}</Form.Label
-							>
-							<Select.Root
-								type="single"
-								{...props}
-								bind:value={$formData.province}
-								onValueChange={() => ($formData.city = '')}
-							>
-								<Select.Trigger
-									class={cn(
-										'focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
-										{ 'text-sm': !triggeredProvince?.id }
-									)}
-								>
-									{#snippet children()}
-										{#if isEnglish}
-											{triggeredProvince?.label}
-										{:else}
-											{triggeredProvince?.fr_label}
-										{/if}
-									{/snippet}
-								</Select.Trigger>
-								<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
-									<Select.Group>
-										<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-											>{m['form.sections.professional.province.label']()}</Select.Label
-										>
-										{#each provinces as province}
-											<Select.Item
-												value={province.value}
-												class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
-											>
-												{#if isEnglish}
-													{province.label}
-												{:else}
-													{province.fr_label}
-												{/if}
-											</Select.Item>
-										{/each}
-									</Select.Group>
-								</Select.Content>
-							</Select.Root>
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-
-				<Form.Field {form} name="city">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.professional.city.label']()}</Form.Label
-							>
-							<Select.Root
-								{...props}
-								type="single"
-								bind:value={$formData.city}
-								disabled={!triggeredProvince?.id}
-							>
-								<Select.Trigger
-									class={cn(
-										'focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
-										{ 'text-sm': !triggeredCity?.id }
-									)}
-								>
-									{#snippet children()}
-										{#if isEnglish}
-											{triggeredCity?.label}
-										{:else}
-											{triggeredCity?.fr_label}
-										{/if}
-									{/snippet}
-								</Select.Trigger>
-								<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
-									<Select.Group>
-										<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-											>{m['form.sections.professional.city.label']()}</Select.Label
-										>
-										{#each cityOptions as city}
-											<Select.Item
-												value={city.value}
-												class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
-											>
-												{#if isEnglish}
-													{city.label}
-												{:else}
-													{city.fr_label}
-												{/if}
-											</Select.Item>
-										{/each}
-									</Select.Group>
-								</Select.Content>
-							</Select.Root>
-						{/snippet}
-					</Form.Control>
-					<Form.Description class={descriptionClasses}
-						>{m['form.sections.professional.city.description']()}</Form.Description
-					>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			</div>
-
-			<Form.Field {form} name="specializations">
+		<div class="grid gap-4 md:grid-cols-2">
+			<Form.Field {form} name="firstName">
 				<Form.Control>
 					{#snippet children({ props })}
 						<Form.Label class={labelClasses}>
-							{m['form.sections.professional.specializations.label']()}
+							{m['form.sections.personal.firstName.label']()}
 						</Form.Label>
-						<Select.Root {...props} type="multiple" bind:value={$formData.specializations}>
-							<Select.Trigger
-								class={cn(
-									'focus:border-primary focus:ring-primary/20 flex !h-auto min-h-[3.25rem] w-full flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none',
-									$formData.specializations?.length > 0 ? 'justify-start' : 'justify-center'
-								)}
-							>
+						<Input {...props} class={inputClasses} bind:value={$formData.firstName} />
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+
+			<Form.Field {form} name="lastName">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}>
+							{m['form.sections.personal.lastName.label']()}
+						</Form.Label>
+						<Input {...props} class={inputClasses} bind:value={$formData.lastName} />
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+		</div>
+
+		<div class="grid gap-4 md:grid-cols-2">
+			<Form.Field {form} name="email">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}>
+							{m['form.sections.personal.email.label']()}
+						</Form.Label>
+						<Input type="email" {...props} class={inputClasses} bind:value={$formData.email} />
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+
+			<Form.Field {form} name="phone">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}>
+							{m['form.sections.personal.phone.label']()}
+						</Form.Label>
+						<Input type="tel" {...props} class={inputClasses} bind:value={$formData.phone} />
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+		</div>
+
+		<div class="grid gap-4 md:grid-cols-2">
+			<Form.Field {form} name="province">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}>
+							{m['form.sections.professional.province.label']()}
+						</Form.Label>
+						<Select.Root
+							type="single"
+							{...props}
+							bind:value={$formData.province}
+							onValueChange={() => ($formData.city = '')}
+						>
+							<Select.Trigger class={inputClasses}>
 								{#snippet children()}
-									{#each triggeredSpecializations as specialization}
-										<Badge
-											class="bg-primary/10 text-primary hover:bg-primary/15 px-2 py-1 text-sm font-medium transition-colors"
-										>
-											{#if isEnglish}
-												{specialization?.label}
-											{:else}
-												{specialization?.fr_label}
-											{/if}
-											<button
-												type="button"
-												class="focus-visible:outline-ring/70 text-primary/70 hover:bg-primary/20 hover:text-primary -my-px -ms-px -me-1 ml-1.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full p-0 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2"
-												onclick={() => {
-													$formData.specializations = $formData.specializations.filter(
-														(s: string) => s !== specialization?.value
-													);
-												}}
-											>
-												<X size={12} aria-hidden="true" />
-											</button>
-										</Badge>
+									{#if isEnglish}
+										{triggeredProvince?.label}
 									{:else}
-										<span class="text-gray-500 text-sm"
-											>{m['form.sections.professional.specializations.placeholder']()}</span
-										>
-									{/each}
+										{triggeredProvince?.fr_label}
+									{/if}
 								{/snippet}
 							</Select.Trigger>
-							<Select.Content
-								class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg"
-							>
-								<Select.Group class="space-y-1 p-1">
-									<Select.Label class="px-2 py-1.5 text-sm font-medium text-gray-500"
-										>{m['form.sections.professional.specializations.label']()}</Select.Label
-									>
-									{#each specializations as specialization}
+							<Select.Content class="bg-background rounded-md border shadow-lg">
+								<Select.Group>
+									{#each provinces as province}
 										<Select.Item
-											value={specialization.value}
-											class="hover:bg-primary/5 focus:bg-primary/5 data-selected:bg-primary/10 data-selected:text-primary relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+											value={province.value}
+											class="hover:bg-muted cursor-pointer px-3 py-2 text-sm"
 										>
 											{#if isEnglish}
-												{specialization.label}
+												{province.label}
 											{:else}
-												{specialization.fr_label}
+												{province.fr_label}
 											{/if}
 										</Select.Item>
 									{/each}
+								</Select.Group>
+							</Select.Content>
+						</Select.Root>
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+
+			<Form.Field {form} name="city">
+				<Form.Control>
+					{#snippet children({ props })}
+						<Form.Label class={labelClasses}>
+							{m['form.sections.professional.city.label']()}
+						</Form.Label>
+						<Select.Root
+							{...props}
+							type="single"
+							bind:value={$formData.city}
+							disabled={!triggeredProvince?.id}
+						>
+							<Select.Trigger class={cn(inputClasses, !triggeredProvince?.id && 'opacity-50')}>
+								{#snippet children()}
+									{#if isEnglish}
+										{triggeredCity?.label}
+									{:else}
+										{triggeredCity?.fr_label}
+									{/if}
+								{/snippet}
+							</Select.Trigger>
+							<Select.Content class="bg-background rounded-md border shadow-lg">
+								<Select.Group>
+									{#each cityOptions as city}
+										<Select.Item
+											value={city.value}
+											class="hover:bg-muted cursor-pointer px-3 py-2 text-sm"
+										>
+											{#if isEnglish}
+												{city.label}
+											{:else}
+												{city.fr_label}
+											{/if}
+										</Select.Item>
+									{/each}
+								</Select.Group>
+							</Select.Content>
+						</Select.Root>
+					{/snippet}
+				</Form.Control>
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+			</Form.Field>
+		</div>
+
+		<Form.Field {form} name="specializations">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label class={labelClasses}>
+						{m['form.sections.professional.specializations.label']()}
+					</Form.Label>
+					<Select.Root {...props} type="multiple" bind:value={$formData.specializations}>
+						<Select.Trigger
+							class={cn(
+								inputClasses,
+								'flex !h-auto min-h-[2.5rem] flex-wrap items-center gap-1',
+								$formData.specializations?.length > 0 ? 'justify-start' : 'justify-center'
+							)}
+						>
+							{#snippet children()}
+								{#each triggeredSpecializations as specialization}
+									<Badge class="bg-primary/10 text-primary hover:bg-primary/15 px-2 py-0.5 text-xs">
+										{#if isEnglish}
+											{specialization?.label}
+										{:else}
+											{specialization?.fr_label}
+										{/if}
+										<button
+											type="button"
+											class="text-primary/70 hover:text-primary ml-1"
+											onclick={() => {
+												$formData.specializations = $formData.specializations.filter(
+													(s: string) => s !== specialization?.value
+												);
+											}}
+										>
+											<X size={10} />
+										</button>
+									</Badge>
+								{:else}
+									<span class="text-muted-foreground text-sm">
+										{m['form.sections.professional.specializations.placeholder']()}
+									</span>
+								{/each}
+							{/snippet}
+						</Select.Trigger>
+						<Select.Content class="bg-background rounded-md border shadow-lg">
+							<Select.Group>
+								{#each specializations as specialization}
 									<Select.Item
-										value="other"
-										class="hover:bg-primary/5 focus:bg-primary/5 data-selected:bg-primary/10 data-selected:text-primary relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+										value={specialization.value}
+										class="hover:bg-muted cursor-pointer px-3 py-2 text-sm"
 									>
 										{#if isEnglish}
-											Other
+											{specialization.label}
 										{:else}
-											Autre
+											{specialization.fr_label}
 										{/if}
 									</Select.Item>
-								</Select.Group>
-							</Select.Content>
-						</Select.Root>
-					{/snippet}
-				</Form.Control>
-				<Form.Description class={descriptionClasses}
-					>{m['form.sections.professional.specializations.description']()}</Form.Description
-				>
-				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-			</Form.Field>
+								{/each}
+								<Select.Item value="other" class="hover:bg-muted cursor-pointer px-3 py-2 text-sm">
+									{#if isEnglish}
+										Other
+									{:else}
+										Autre
+									{/if}
+								</Select.Item>
+							</Select.Group>
+						</Select.Content>
+					</Select.Root>
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+		</Form.Field>
 
-			{#if otherSpecialization}
-				<Form.Field {form} name="otherSpecialization">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.professional.otherSpecialization.label']()}</Form.Label
-							>
-							<Input
-								{...props}
-								class={inputClasses}
-								bind:value={$formData.otherSpecialization}
-								placeholder={m['form.sections.professional.otherSpecialization.placeholder']()}
-							/>
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			{/if}
-
-			<div class="grid gap-8 md:grid-cols-2">
-				<Form.Field {form} name="yearsPractice">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.professional.yearsPractice.label']()}</Form.Label
-							>
-							<Input
-								type="number"
-								min="0"
-								max="70"
-								{...props}
-								class={inputClasses}
-								bind:value={$formData.yearsPractice}
-							/>
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-
-				<Form.Field {form} name="firmName">
-					<Form.Control>
-						{#snippet children({ props })}
-							<Form.Label class={labelClasses}
-								>{m['form.sections.professional.firmName.label']()}</Form.Label
-							>
-							<Input {...props} class={inputClasses} bind:value={$formData.firmName} />
-						{/snippet}
-					</Form.Control>
-					<Form.Description class={descriptionClasses}
-						>{m['form.sections.professional.firmName.description']()}</Form.Description
-					>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			</div>
-
-			<Form.Field {form} name="website">
+		{#if otherSpecialization}
+			<Form.Field {form} name="otherSpecialization">
 				<Form.Control>
 					{#snippet children({ props })}
-						<Form.Label class={labelClasses}
-							>{m['form.sections.professional.website.label']()}</Form.Label
-						>
-						<Input type="url" {...props} class={inputClasses} bind:value={$formData.website} />
+						<Form.Label class={labelClasses}>
+							{m['form.sections.professional.otherSpecialization.label']()}
+						</Form.Label>
+						<Input
+							{...props}
+							class={inputClasses}
+							bind:value={$formData.otherSpecialization}
+							placeholder={m['form.sections.professional.otherSpecialization.placeholder']()}
+						/>
 					{/snippet}
 				</Form.Control>
-				<Form.Description class={descriptionClasses}
-					>{m['form.sections.professional.website.description']()}</Form.Description
-				>
-				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
+				<Form.FieldErrors class="text-destructive mt-1 text-xs" />
 			</Form.Field>
-		</div>
+		{/if}
 
-		<!-- Additional Information -->
-		<div class="space-y-8">
-			<div class="flex items-center gap-3 border-b border-gray-200 pb-4">
-				<Info class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-semibold">{m['form.sections.additional.title']()}</h2>
-			</div>
-			<Form.Field {form} name="referralSource">
-				<Form.Control>
-					{#snippet children({ props })}
-						<Form.Label class={labelClasses}
-							>{m['form.sections.additional.referralSource.label']()}</Form.Label
+		<Form.Field {form} name="agreeBeta">
+			<Form.Control>
+				{#snippet children({ props })}
+					<div class="flex items-start gap-3">
+						<input
+							{...props}
+							type="checkbox"
+							class="border-input text-primary focus:ring-primary mt-0.5 h-4 w-4 rounded focus:ring-1"
+							bind:checked={$formData.agreeBeta}
+							required
+						/>
+						<button
+							type="button"
+							class="text-foreground hover:text-primary text-sm underline underline-offset-2"
+							onclick={() => (showNdaModal = true)}
 						>
-						<Select.Root type="single" {...props} bind:value={$formData.referralSource}>
-							<Select.Trigger
-								class="focus:border-primary focus:ring-primary/20 w-full rounded-lg border border-gray-200 bg-white/50 px-4 py-3 text-base transition-colors focus:ring-2 focus:outline-none"
-							>
-								{#if isEnglish}
-									{referralSources.find((source) => source.value === $formData.referralSource)
-										?.label}
-								{:else}
-									{referralSources.find((source) => source.value === $formData.referralSource)
-										?.fr_label}
-								{/if}
-							</Select.Trigger>
-							<Select.Content class="rounded-lg border border-gray-200 bg-white shadow-lg">
-								<Select.Group>
-									<Select.Label class="px-4 py-2 text-sm font-medium text-gray-500"
-										>{m['form.sections.additional.referralSource.label']()}</Select.Label
-									>
-									{#each referralSources as source}
-										<Select.Item
-											value={source.value}
-											class="cursor-pointer px-4 py-2 text-base hover:bg-gray-50"
-										>
-											{#if isEnglish}
-												{source.label}
-											{:else}
-												{source.fr_label}
-											{/if}
-										</Select.Item>
-									{/each}
-								</Select.Group>
-							</Select.Content>
-						</Select.Root>
-					{/snippet}
-				</Form.Control>
-				<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-			</Form.Field>
-
-			<div class="space-y-6">
-				<Form.Field {form} name="agreeBeta">
-					<Form.Control>
-						{#snippet children({ props })}
-							<div class="flex items-center gap-3">
-								<input
-									{...props}
-									type="checkbox"
-									class="text-primary focus:ring-primary/20 h-5 w-5 rounded border-gray-300"
-									bind:checked={$formData.agreeBeta}
-									required
-								/>
-								<button
-									type="button"
-									class="text-primary hover:text-primary/80 cursor-pointer text-base font-medium underline decoration-2 underline-offset-2"
-									onclick={() => (showNdaModal = true)}
-								>
-									{m['form.sections.additional.agreeBeta.label']()}
-								</button>
-							</div>
-						{/snippet}
-					</Form.Control>
-					<Form.FieldErrors class="mt-2 text-sm text-red-500" />
-				</Form.Field>
-			</div>
-		</div>
+							{m['form.sections.additional.agreeBeta.label']()}
+						</button>
+					</div>
+				{/snippet}
+			</Form.Control>
+			<Form.FieldErrors class="text-destructive mt-1 text-xs" />
+		</Form.Field>
 
 		<Button
 			onclick={handleSubmit}
 			disabled={$submitting}
 			class={cn(
-				'relative w-full py-7 text-lg font-semibold',
-				'from-primary bg-gradient-to-r to-blue-600',
-				'shadow-primary/30 shadow-[0_4px_20px_-3px]',
-				'hover:shadow-primary/40 hover:shadow-[0_8px_30px_-3px]',
-				'hover:scale-[1.01] active:scale-[0.99]',
-				'transition-all duration-300 ease-out',
-				'after:absolute after:inset-0',
-				'after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0',
-				'after:translate-x-[-100%] hover:after:translate-x-[100%]',
-				'after:transition-transform after:duration-500',
-				'overflow-hidden',
-				'flex items-center justify-center gap-3',
-				$submitting &&
-					'cursor-not-allowed opacity-70 hover:scale-100 hover:shadow-[0_4px_20px_-3px]'
+				'w-full py-3 font-semibold',
+				'transition-colors duration-200',
+				'flex items-center justify-center gap-2',
+				$submitting && 'cursor-not-allowed opacity-70'
 			)}
 		>
 			{#if $submitting}
-				<div
-					class="relative z-10 size-5 animate-spin rounded-full border-2 border-white/30 border-t-white"
-				></div>
+				<Loader2 class="h-4 w-4 animate-spin" />
+				<span>Submitting...</span>
 			{:else}
-				<span class="relative z-10">{m['form.submit']()}</span>
-				<ArrowRight
-					class={cn(
-						'relative z-10 h-5 w-5',
-						'transition-transform duration-300',
-						'group-hover:translate-x-1'
-					)}
-				/>
+				<span>{m['form.submit']()}</span>
+				<ArrowRight class="h-4 w-4" />
 			{/if}
 		</Button>
 	</form>
