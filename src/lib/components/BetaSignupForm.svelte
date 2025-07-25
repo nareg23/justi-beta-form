@@ -415,7 +415,7 @@
 			onclick={handleSubmit}
 			disabled={$submitting}
 			class={cn(
-				'w-full py-3 font-semibold',
+				'w-full py-6 font-semibold',
 				'transition-colors duration-200',
 				'flex items-center justify-center gap-2',
 				$submitting && 'cursor-not-allowed opacity-70'
@@ -423,7 +423,7 @@
 		>
 			{#if $submitting}
 				<Loader2 class="h-4 w-4 animate-spin" />
-				<span>Submitting...</span>
+				<span>{m['form.submitting']()}</span>
 			{:else}
 				<span>{m['form.submit']()}</span>
 				<ArrowRight class="h-4 w-4" />
