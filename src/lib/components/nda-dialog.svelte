@@ -34,11 +34,6 @@
 		</div>
 
 		<Dialog.Footer class="mt-6 flex justify-end gap-3">
-			<Dialog.Close
-				class="inline-flex h-10 items-center justify-center rounded-md bg-gray-100 px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-200"
-			>
-				{m['form.nda.buttons.decline']()}
-			</Dialog.Close>
 			<Button
 				type="button"
 				class="bg-primary/95 hover:bg-primary/90 in line-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white transition-colors"

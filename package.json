@@ -51,6 +51,8 @@
 		]
 	},
 	"dependencies": {
+		"@fontsource-variable/nunito-sans": "^5.2.6",
+		"@fontsource-variable/roboto": "^5.2.6",
 		"@inlang/paraglide-js": "^2.0.0",
 		"@supabase/supabase-js": "^2.50.3",
 		"lucide-svelte": "^0.525.0",

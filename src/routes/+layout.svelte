@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 	import '../app.css';
+	import '@fontsource-variable/roboto';
+	import '@fontsource-variable/nunito-sans';
 
 	let { children } = $props();
 </script>

@@ -52,7 +52,8 @@
 			"title": "Plus de Clients. Moins d'Administration.",
 			"subtitle": "Plateforme de génération de prospects pour avocats canadiens.",
 			"cta": "Accès Beta",
-			"trust_badge": "Conçu en collaboration avec des professionnels du droit"
+			"trust_badge": "Conçu en collaboration avec des professionnels du droit",
+			"mediaCaption": "Transformez votre pratique juridique avec JustiConnect"
 		},
 		"coming_soon": {
 			"badge": "À venir",
@@ -109,7 +110,9 @@
 		"urgency": {
 			"limitedAccess": "Accès Bêta Limité",
 			"spotsAvailable": "Seulement 200 places disponibles",
-			"applyNow": "Postulez maintenant"
+			"applyNow": "Postulez maintenant",
+			"progressLabel": "Avocats acceptés",
+			"fastFilling": "Les places bêta se remplissent vite. Sécurisez votre accès aujourd'hui!"
 		},
 		"header": {
 			"title": "JustiConnect Bêta",
@@ -132,15 +135,16 @@
 		},
 		"earlyAdopter": {
 			"title": "Avantages Adopteur Précoce",
-			"freeAccess": "Accès bêta gratuit",
+			"freeAccess": " 100% Accès bêta gratuit",
 			"exclusiveDiscount": "Remise exclusive",
 			"prioritySupport": "Support prioritaire"
 		},
 		"howItWorks": {
 			"title": "Comment Ça Fonctionne",
-			"step1": "Nous promouvons votre profil",
-			"step2": "Les clients demandent des consultations",
-			"step3": "Vous acceptez et facturez"
+			"step1": "Nous listons et promouvons votre profil",
+			"step2": "Les clients demandent des consultations en ligne.",
+			"step3": "Vous confirmez et facturez directement.",
+			"subtitle": "Étapes simples pour développer votre pratique"
 		},
 		"testimonial": {
 			"quote": "8 prospects qualifiés en un mois. Trois sont devenus clients.",
@@ -219,7 +223,7 @@
 				}
 			}
 		},
-		"submit": "Soumettre la candidature",
+		"submit": "Rejoignez la Bêta - C'est Gratuit!",
 		"footer": {
 			"copyright": "© {year} JustiConnect. Tous droits réservés.",
 			"madeIn": "Fait au Canada 🍁 ",

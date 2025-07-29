@@ -13,6 +13,7 @@
 	import { getLocale } from '$lib/paraglide/runtime';
 	import NdaDialog from './nda-dialog.svelte';
 	import type { SuperForm } from 'sveltekit-superforms';
+	import { Checkbox } from '$lib/components/ui/checkbox/index.js';
 	interface Props {
 		form: SuperForm<
 			{
@@ -127,7 +128,7 @@
 <div class="relative">
 	{#if $submitting || $delayed}
 		<div
-			class="bg-background/80 absolute inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+			class="bg-background absolute inset-0 z-50 flex items-center justify-center rounded backdrop-blur-sm"
 		>
 			<div class="flex flex-col items-center gap-2">
 				<Loader2 class="text-primary h-6 w-6 animate-spin" />
@@ -391,10 +392,9 @@
 			<Form.Control>
 				{#snippet children({ props })}
 					<div class="flex items-start gap-3">
-						<input
+						<Checkbox
 							{...props}
-							type="checkbox"
-							class="border-input text-primary focus:ring-primary mt-0.5 h-4 w-4 rounded focus:ring-1"
+							class="border-input text-primary focus:ring-primary mt-0.5 h-4 w-4 rounded  focus:ring-1"
 							bind:checked={$formData.agreeBeta}
 							required
 						/>
@@ -411,24 +411,59 @@
 			<Form.FieldErrors class="text-destructive mt-1 text-xs" />
 		</Form.Field>
 
-		<Button
-			onclick={handleSubmit}
-			disabled={$submitting}
-			class={cn(
-				'w-full py-6 font-semibold',
-				'transition-colors duration-200',
-				'flex items-center justify-center gap-2',
-				$submitting && 'cursor-not-allowed opacity-70'
-			)}
-		>
-			{#if $submitting}
-				<Loader2 class="h-4 w-4 animate-spin" />
-				<span>{m['form.submitting']()}</span>
-			{:else}
-				<span>{m['form.submit']()}</span>
-				<ArrowRight class="h-4 w-4" />
+		<div class="relative">
+			<!-- Gradient border container -->
+			<div
+				class="from-primary via-primary-strong to-primary shadow-primary/50 rounded-xl bg-gradient-to-r p-[2px] shadow-2xl"
+			>
+				<Button
+					onclick={handleSubmit}
+					disabled={$submitting}
+					class={cn(
+						'relative w-full py-6 text-lg font-bold',
+						'from-primary to-primary-strong text-primary-foreground bg-gradient-to-r',
+						'transition-all duration-300 ease-out',
+						'hover:shadow-primary/60 hover:scale-[1.02] hover:shadow-2xl',
+						'active:scale-[0.98]',
+						'flex items-center justify-center gap-3',
+						'overflow-hidden rounded-xl',
+						$submitting
+							? 'cursor-not-allowed opacity-70'
+							: 'hover:from-primary-strong hover:to-primary transform'
+					)}
+				>
+					<!-- Animated shimmer overlay -->
+					{#if !$submitting}
+						<div
+							class="animate-shimmer absolute inset-0 -top-1 -left-full h-full w-1/2 skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+						></div>
+					{/if}
+
+					<div class="relative z-10 flex items-center justify-center gap-3">
+						{#if $submitting}
+							<Loader2 class="h-5 w-5 animate-spin" />
+							<span class="font-bold">{m['form.submitting']()}</span>
+						{:else}
+							<span class="font-bold tracking-wide">{m['form.submit']()}</span>
+							<div
+								class="bg-primary-foreground/20 flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-1"
+							>
+								<ArrowRight class="h-4 w-4" />
+							</div>
+						{/if}
+					</div>
+				</Button>
+			</div>
+
+			<!-- Pulsing glow effect -->
+			{#if !$submitting}
+				<div class="absolute inset-0 -z-10 animate-pulse">
+					<div
+						class="from-primary/20 to-primary-strong/20 absolute inset-0 rounded-xl bg-gradient-to-r blur-xl"
+					></div>
+				</div>
 			{/if}
-		</Button>
+		</div>
 	</form>
 </div>
 
@@ -436,3 +471,18 @@
 	bind:showNdaModal
 	handleClick={() => ((showNdaModal = false), ($formData.agreeBeta = true), console.log($formData))}
 />
+
+<style>
+	@keyframes shimmer {
+		0% {
+			transform: translateX(-100%) skewX(-12deg);
+		}
+		100% {
+			transform: translateX(300%) skewX(-12deg);
+		}
+	}
+
+	.animate-shimmer {
+		animation: shimmer 2s infinite;
+	}
+</style>

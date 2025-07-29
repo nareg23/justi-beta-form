@@ -52,7 +52,8 @@
 			"title": "More Clients. Less Admin.",
 			"subtitle": "Lead generation platform for Canadian lawyers.",
 			"cta": "Get Early Access",
-			"trust_badge": "Built in Collaboration with Legal Professionals"
+			"trust_badge": "Built in Collaboration with Legal Professionals",
+			"mediaCaption": "Transform your legal practice with JustiConnect"
 		},
 		"coming_soon": {
 			"badge": "Coming Soon",
@@ -109,10 +110,12 @@
 		"urgency": {
 			"limitedAccess": "Limited Beta Access",
 			"spotsAvailable": "Only 200 spots available",
-			"applyNow": "Apply now"
+			"applyNow": "Apply now",
+			"progressLabel": "Lawyers accepted",
+			"fastFilling": "Beta spots filling fast. Secure your access today!"
 		},
 		"header": {
-			"title": "JustiConnect Beta",
+			"title": "JustiConnect",
 			"subtitle": "Lead Generation Platform for Canadian Lawyers"
 		},
 		"benefits": {
@@ -132,15 +135,16 @@
 		},
 		"earlyAdopter": {
 			"title": "Early Adopter Benefits",
-			"freeAccess": "Free beta access",
+			"freeAccess": " 100% Free beta access",
 			"exclusiveDiscount": "Exclusive discount",
 			"prioritySupport": "Priority support"
 		},
 		"howItWorks": {
 			"title": "How It Works",
-			"step1": "We promote your profile",
-			"step2": "Clients request consultations",
-			"step3": "You accept and bill"
+			"step1": "We List and  promote your profile",
+			"step2": "Clients request consultations online.",
+			"step3": "You confirm and bill directly.",
+			"subtitle": "Simple steps to grow your practice"
 		},
 		"testimonial": {
 			"quote": "8 qualified leads in my first month. Three became clients.",
@@ -219,7 +223,7 @@
 				}
 			}
 		},
-		"submit": "Submit Application",
+		"submit": "Join the Beta - It's Free!",
 		"footer": {
 			"copyright": "© {year} JustiConnect. All rights reserved.",
 			"madeIn": "Made in Canada 🍁 ",

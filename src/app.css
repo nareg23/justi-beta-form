@@ -151,8 +151,11 @@
 	--color-input: var(--input);
 	--color-primary: var(--primary);
 	--color-primary-foreground: var(--primary-foreground);
+	--color-primary-strong: var(--primary-strong);
+	--color-primary-stronger: var(--primary-stronger);
 	--color-secondary: var(--secondary);
 	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary-strong: var(--secondary-strong);
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
