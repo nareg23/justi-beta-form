@@ -84,10 +84,6 @@ export const actions: Actions = {
 				type: 'error'
 			});
 		}
-		return message(form, {
-			text: m['form.submission.success'](),
-			type: 'success'
-		});
 
 		const saved = await saveForm(form.data);
 		if (!saved) {
@@ -96,5 +92,10 @@ export const actions: Actions = {
 				type: 'error'
 			});
 		}
+
+		return message(form, {
+			text: m['form.submission.success'](),
+			type: 'success'
+		});
 	}
 };
