@@ -9,7 +9,8 @@ type CaptchaVerificationResult = {
 
 export async function verifyCaptcha(
 	token: string,
-	secretKey: string = PRIVATE_CAPTCHA_SECRET_KEY
+	secretKey: string = PRIVATE_CAPTCHA_SECRET_KEY,
+	scoreThreshold: number = 0.5
 ): Promise<CaptchaVerificationResult> {
 	if (!token) return { success: false, message: 'No captcha token provided' };
 	try {
@@ -28,6 +29,13 @@ export async function verifyCaptcha(
 			'error-codes'?: string[];
 			message?: string;
 		};
+
+		if (result.success && result.score && result.score < scoreThreshold) {
+			return {
+				success: false,
+				message: 'Verification failed'
+			};
+		}
 
 		return {
 			success: result.success === true,

@@ -76,14 +76,18 @@ export const actions: Actions = {
 			);
 		}
 
-		const { success, score, message: captchaMessage } = await verifyCaptcha(form.data.captchaToken);
+		const { success } = await verifyCaptcha(form.data.captchaToken);
 
-		if (!success || (score && score < 0.5)) {
+		if (!success) {
 			return message(form, {
-				text: captchaMessage,
+				text: m['form.submission.error'](),
 				type: 'error'
 			});
 		}
+		return message(form, {
+			text: m['form.submission.success'](),
+			type: 'success'
+		});
 
 		const saved = await saveForm(form.data);
 		if (!saved) {
@@ -92,10 +96,5 @@ export const actions: Actions = {
 				type: 'error'
 			});
 		}
-
-		return message(form, {
-			text: m['form.submission.success'](),
-			type: 'success'
-		});
 	}
 };

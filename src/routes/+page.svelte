@@ -29,7 +29,6 @@
 	const form = superForm(data.form, {
 		validators: zodClient(formSchema),
 		multipleSubmits: 'prevent',
-		resetForm: false,
 		delayMs: 1000
 	});
 
