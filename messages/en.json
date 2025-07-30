@@ -116,7 +116,14 @@
 		},
 		"header": {
 			"title": "JustiConnect",
-			"subtitle": "Lead Generation Platform for Canadian Lawyers"
+			"subtitle": "Lead Generation Platform for Canadian Lawyers",
+			"betaProgram": "Beta Program",
+			"earlyAccess": "Early Access",
+			"liveStatus": "Live",
+			"languageSwitcher": {
+				"french": "FR",
+				"english": "EN"
+			}
 		},
 		"benefits": {
 			"title": "Key Benefits",

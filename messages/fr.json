@@ -116,7 +116,14 @@
 		},
 		"header": {
 			"title": "JustiConnect Bêta",
-			"subtitle": "Plateforme de Génération de Prospects pour Avocats Canadiens"
+			"subtitle": "Plateforme de Génération de Prospects pour Avocats Canadiens",
+			"betaProgram": "Programme Bêta",
+			"earlyAccess": "Accès Anticipé",
+			"liveStatus": "En Direct",
+			"languageSwitcher": {
+				"french": "FR",
+				"english": "EN"
+			}
 		},
 		"benefits": {
 			"title": "Avantages Clés",

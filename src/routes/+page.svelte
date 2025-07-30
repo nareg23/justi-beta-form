@@ -8,17 +8,7 @@
 	import BetaSignupForm from '$lib/components/BetaSignupForm.svelte';
 	import LOGO from '$lib/assets/LOGO-PRO-ON-WHITE.svg';
 	import { getLocale, setLocale } from '$lib/paraglide/runtime.js';
-	import {
-		Clock,
-		BadgeCheck,
-		Star,
-		Zap,
-		Shield,
-		Rocket,
-		Headset,
-		UsersRound,
-		Pocket
-	} from 'lucide-svelte';
+	import { Clock, BadgeCheck, Star, Zap, Shield, Rocket, Headset, UsersRound } from 'lucide-svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { FAQ } from '$lib/consts/faq';
 
@@ -62,111 +52,108 @@
 	></div>
 
 	<div class="relative z-10">
-		<div class="text-background bg-gray-800">
-			<div class="container py-2">
+		<div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white">
+			<div class="container px-4 py-2 sm:py-3">
 				<div
-					class="flex flex-col items-center gap-2 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 to-purple-600 sm:flex-row sm:items-center sm:justify-between"
+					class="from-primary/10 via-secondary/5 to-primary/10 flex items-center justify-between gap-2 rounded-lg bg-gradient-to-r px-3 py-2 backdrop-blur-sm sm:justify-center sm:gap-4 sm:px-4"
 				>
 					<div
-						class="flex flex-wrap items-center justify-center gap-2 text-xs sm:flex-1 sm:gap-3 sm:text-sm"
+						class="flex flex-1 items-center justify-start gap-1.5 text-xs sm:flex-none sm:justify-center sm:gap-3 sm:text-sm"
 					>
 						<div
-							class="bg-primary/30 border-primary/40 flex items-center gap-1 rounded-full border px-3 py-1 sm:gap-2"
+							class="border-pending/40 bg-pending/20 text-background flex items-center gap-1 rounded-full border px-2 py-1 sm:gap-1.5 sm:px-3 sm:py-1.5"
 						>
-							<Clock class="text-primary h-3 w-3 animate-pulse" />
-							<span class="font-medium">{m['landing.urgency.limitedAccess']()}</span>
+							<Clock class="text-pending h-2.5 w-2.5 animate-pulse sm:h-3 sm:w-3" />
+							<span class="text-xs font-medium sm:text-sm"
+								>{m['landing.urgency.limitedAccess']()}</span
+							>
 						</div>
-						<span class="text-primary-foreground/60 hidden sm:inline">•</span>
-						<span
-							class="bg-secondary/30 border-secondary/50 flex items-center gap-2 rounded-full border px-3 py-1 text-center"
+						<span class="hidden text-white/40 sm:inline">•</span>
+						<div
+							class="border-confirmed/40 bg-confirmed/20 text-background hidden items-center gap-1 rounded-full border px-2 py-1 text-center sm:flex sm:gap-1.5 sm:px-3 sm:py-1.5"
 						>
-							<UsersRound class="text-secondary size-3" />
-							{m['landing.urgency.spotsAvailable']()}
-						</span>
-						<span class="text-primary-foreground/60 hidden sm:inline">•</span>
-						<span
-							class="bg-confirmed/70 border-confirmed text-card flex items-center gap-2 rounded-full border px-3 py-1 font-medium"
+							<UsersRound class="text-confirmed size-2.5 sm:size-3" />
+							<span class="text-xs sm:text-sm">{m['landing.urgency.spotsAvailable']()}</span>
+						</div>
+						<span class="hidden text-white/40 sm:inline">•</span>
+						<div
+							class="border-secondary/40 bg-secondary/20 text-secondary-foreground flex items-center gap-1 rounded-full border px-2 py-1 font-medium sm:gap-1.5 sm:px-3 sm:py-1.5"
 						>
-							<Rocket class="text-confirmed size-3" />
-							{m['landing.urgency.applyNow']()}
-						</span>
-						>
+							<Rocket class="text-secondary size-2.5 sm:size-3" />
+							<span class="text-xs sm:text-sm">{m['landing.urgency.applyNow']()}</span>
+						</div>
 					</div>
 
 					<!-- Language Switcher -->
 					<div
-						class="flex items-center gap-0.5 rounded-lg border border-white/30 bg-white/20 text-xs backdrop-blur-sm"
+						class="flex items-center gap-0.5 rounded-lg border border-white/20 bg-white/10 text-xs backdrop-blur-sm sm:text-sm"
 					>
 						<button
 							type="button"
 							onclick={() => setLocale('fr')}
-							class={`cursor-pointer rounded-l-lg px-2 py-1 font-medium transition-all duration-300 sm:px-3 sm:py-1.5 ${
+							class={`cursor-pointer rounded-l-lg px-3 py-1.5 font-medium transition-all duration-300 sm:px-3 sm:py-1.5 ${
 								getLocale() === 'fr'
-									? 'text-foreground scale-105 bg-white shadow-lg'
-									: 'text-background hover:scale-105 hover:bg-white/20'
+									? 'scale-105 bg-white/90 text-slate-800 shadow-lg'
+									: 'text-white/80 hover:scale-105 hover:bg-white/15 hover:text-white'
 							}`}
 						>
-							FR
+							{m['landing.header.languageSwitcher.french']()}
 						</button>
 						<button
 							type="button"
 							onclick={() => setLocale('en')}
-							class={`cursor-pointer rounded-r-lg px-2 py-1 font-medium transition-all duration-300 sm:px-3 sm:py-1.5 ${
+							class={`cursor-pointer rounded-r-lg px-3 py-1.5 font-medium transition-all duration-300 sm:px-3 sm:py-1.5 ${
 								getLocale() === 'en'
-									? 'text-foreground scale-105 bg-white shadow-lg'
-									: 'text-background hover:scale-105 hover:bg-white/20'
+									? 'scale-105 bg-white/90 text-slate-800 shadow-lg'
+									: 'text-white/80 hover:scale-105 hover:bg-white/15 hover:text-white'
 							}`}
 						>
-							EN
+							{m['landing.header.languageSwitcher.english']()}
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Header - Sleek and organized -->
+		<!-- Header - Clean and minimal -->
 		<header
-			class="from-card/95 to-card/90 border-primary/15 border-b bg-gradient-to-b backdrop-blur-md transition-all duration-300"
+			class="border-border/40 bg-background/80 border-b backdrop-blur-xl transition-all duration-300"
 		>
-			<div class="container mx-auto px-4">
-				<div class="flex h-16 items-center justify-between">
-					<!-- Logo Section -->
-					<div class="flex items-center gap-3">
-						<div class="relative">
-							<img
-								src={LOGO}
-								alt="JustiConnect"
-								class="h-7 drop-shadow-sm transition-all duration-300 hover:scale-105 sm:h-8"
-							/>
-							<div
-								class="from-primary/10 to-secondary/10 absolute -inset-1 -z-10 rounded-full bg-gradient-to-r opacity-0 blur-sm transition-opacity duration-300 hover:opacity-100"
-							></div>
-						</div>
-						<div class="border-muted-foreground/20 hidden border-l pl-3 sm:block">
-							<h1 class="text-lg font-bold tracking-tight">Beta</h1>
-						</div>
-					</div>
-
-					<!-- Center Title (visible on mobile) -->
-					<div class="sm:hidden">
-						<h1 class="text-foreground text-base font-semibold">
-							{m['landing.header.title']()}
-						</h1>
-					</div>
-
-					<!-- Beta Badge & Subtitle -->
-					<div class="flex items-center gap-4">
-						<div class="hidden text-right lg:block">
-							<p class="text-foreground text-sm leading-tight font-semibold">
-								{m['landing.header.subtitle']()}
-							</p>
-						</div>
+			<div class="container flex h-14 items-center justify-between px-4 sm:h-16">
+				<!-- Logo Section -->
+				<div class="flex items-center gap-2 sm:gap-4">
+					<div class="group relative">
+						<img
+							src={LOGO}
+							alt="JustiConnect"
+							class="h-7 transition-all duration-300 group-hover:scale-105 sm:h-8 lg:h-9"
+						/>
 						<div
-							class="bg-primary/10 border-primary/30 text-primary hover:bg-primary/15 flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-all duration-300"
+							class="from-primary/5 to-secondary/5 absolute -inset-2 -z-10 rounded-xl bg-gradient-to-r opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100"
+						></div>
+					</div>
+					<div class="flex items-center gap-1.5 sm:gap-2">
+						<div class="bg-border h-3 w-px sm:h-4"></div>
+						<span class="text-muted-foreground text-xs font-medium tracking-wide sm:text-sm"
+							>{m['landing.header.betaProgram']()}</span
 						>
-							<div class="bg-primary h-1.5 w-1.5 animate-pulse rounded-full"></div>
-							{m['landing.beta.title']()}
-						</div>
+					</div>
+				</div>
+
+				<!-- Right Section -->
+				<div class="flex items-center gap-2 sm:gap-3">
+					<div class="hidden lg:block">
+						<span class="text-muted-foreground text-sm font-medium">
+							{m['landing.header.earlyAccess']()}
+						</span>
+					</div>
+					<div
+						class="from-primary/10 to-secondary/10 border-primary/20 text-primary hover:from-primary/15 hover:to-secondary/15
+						hover:border-primary/30 flex items-center gap-1.5 rounded-lg border bg-gradient-to-r px-2.5
+						py-1 text-xs font-medium transition-all duration-300 sm:gap-2 sm:px-3 sm:py-1.5"
+					>
+						<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500"></div>
+						<span class="hidden sm:inline">{m['landing.header.liveStatus']()}</span>
 					</div>
 				</div>
 			</div>
