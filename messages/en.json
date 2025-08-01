@@ -129,15 +129,15 @@
 			"title": "Key Benefits",
 			"qualified": {
 				"title": "Qualified clients delivered",
-				"description": "we actively promote your profile and send you ready‑to‑hire leads matched to your practice area."
+				"description": "We actively promote your profile and send you ready‑to‑hire leads matched to your practice area."
 			},
 			"freeBeta": {
 				"title": "Free during beta",
-				"description": "test every feature at no cost now, and qualify for an exclusive early‑adopter discount on the post‑launch monthly plan"
+				"description": "Test every feature at no cost now, and qualify for an exclusive early‑adopter discount on the post‑launch monthly plan"
 			},
 			"management": {
 				"title": "Seamless client & booking management",
-				"description": "accept consultation requests, sync calendars, and track every matter from one intuitive dashboard."
+				"description": "Accept consultation requests, sync calendars, and track every matter from one intuitive dashboard."
 			}
 		},
 		"earlyAdopter": {
@@ -150,7 +150,7 @@
 			"title": "How It Works",
 			"step1": "We List and  promote your profile",
 			"step2": "Clients request consultations online.",
-			"step3": "You confirm and bill directly.",
+			"step3": "Confirm consultation and invoice client.",
 			"subtitle": "Simple steps to grow your practice"
 		},
 		"testimonial": {

@@ -291,7 +291,7 @@
 										<h3 class="text-foreground text-sm font-semibold">
 											{m['landing.benefits.qualified.title']()}
 										</h3>
-										<p class="text-muted-foreground text-xs">
+										<p class="text-muted-foreground text-sm">
 											{m['landing.benefits.qualified.description']()}
 										</p>
 									</div>
@@ -306,7 +306,7 @@
 										<h3 class="text-foreground text-sm font-semibold">
 											{m['landing.benefits.freeBeta.title']()}
 										</h3>
-										<p class="text-muted-foreground text-xs">
+										<p class="text-muted-foreground text-sm">
 											{m['landing.benefits.freeBeta.description']()}
 										</p>
 									</div>
@@ -323,7 +323,7 @@
 										<h3 class="text-foreground text-sm font-semibold">
 											{m['landing.benefits.management.title']()}
 										</h3>
-										<p class="text-muted-foreground text-xs">
+										<p class="text-muted-foreground text-sm">
 											{m['landing.benefits.management.description']()}
 										</p>
 									</div>
