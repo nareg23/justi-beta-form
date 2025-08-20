@@ -11,6 +11,8 @@
 	import { Clock, BadgeCheck, Star, Zap, Shield, Rocket, Headset, UsersRound } from 'lucide-svelte';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { FAQ } from '$lib/consts/faq';
+	import PosterImg from '$lib/assets/hero.png';
+	import 'media-chrome';
 
 	let { data }: { data: PageData } = $props();
 
@@ -21,9 +23,10 @@
 		multipleSubmits: 'prevent',
 		delayMs: 1000
 	});
-
-	const heroImage =
-		'https://media.istockphoto.com/id/1478282808/photo/law-legal-technology-concept-legal-advice-online-internet-law-law-and-justice-concept.jpg?s=2048x2048&w=is&k=20&c=W6jk1S8_4KqXyqrk9QmNv6vRIeXkZmB_QP_LCRcWvbY=';
+	const isEnglish = getLocale() === 'en';
+	const VIDEO_URL = `https://yttvfraquuuxyupkjcbd.supabase.co/storage/v1/object/public/videos/${
+		isEnglish ? 'v3_english' : 'v3_french'
+	}.mp4`;
 </script>
 
 <svelte:head>
@@ -171,42 +174,28 @@
 								class="from-primary/5 via-card to-secondary/5 border-primary/30 shadow-glow overflow-hidden rounded-xl border bg-gradient-to-br backdrop-blur-sm"
 							>
 								<!-- Image Container -->
-								<div class="relative aspect-video">
-									<!-- Placeholder for hero image - replace src with your actual image -->
-									<img
-										src={heroImage}
-										alt={m['landing.hero.title']()}
-										class="h-full w-full object-cover"
-										loading="lazy"
-									/>
-
+								<div class=" aspect-video h-full w-full">
 									<!-- Video container for future use - initially hidden -->
-									<!-- 
-									<video
-										class="h-full w-full object-cover"
-										controls
-										poster="/hero-image.jpg"
-									>
-										<source src="/hero-video.mp4" type="video/mp4" />
-										Your browser does not support the video tag.
-									</video>
-									-->
+									<div class="z-50 h-full w-full">
+										<media-controller class="h-full w-full" autohide="2">
+											<video playsinline class="h-full w-full" slot="media" src={VIDEO_URL}></video>
 
-									<!-- Gradient overlay for better text readability -->
-									<div
-										class="from-primary/20 to-secondary/20 absolute inset-0 bg-gradient-to-r via-transparent"
-									></div>
+											<div slot="centered-chrome" class="mobile">
+												<media-play-button
+													class="bg-primary/50 hover:bg-primary/70 size-16 rounded-full"
+												></media-play-button>
+											</div>
 
-									<!-- Optional overlay content -->
-									<div class="absolute inset-0 flex items-end p-6">
-										<div
-											class="bg-primary/20 text-primary-foreground rounded-lg px-4 py-2 backdrop-blur-sm"
-										>
-											<p class="text-sm font-medium">
-												{m['landing.hero.mediaCaption']?.() ||
-													'Transform your legal practice with JustiConnect'}
-											</p>
-										</div>
+											<media-poster-image
+												slot="poster"
+												class="from-primary/50 to-secondary/30 h-full w-full bg-gradient-to-r opacity-95"
+												src={PosterImg}
+											>
+											</media-poster-image>
+
+											<media-control-bar class="bg-primary/20 flex w-full justify-between">
+											</media-control-bar>
+										</media-controller>
 									</div>
 								</div>
 							</div>

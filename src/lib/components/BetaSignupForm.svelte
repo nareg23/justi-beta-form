@@ -432,6 +432,10 @@
 					<Button
 						onclick={handleSubmit}
 						disabled={$submitting}
+						id="beta-signup-button"
+						data-umami-event="beta-signup-button"
+						data-umami-event-name={$formData.firstName + ' ' + $formData.lastName}
+						data-umami-event-value={$formData.email}
 						class={cn(
 							'relative w-full py-6 text-lg font-bold',
 							'from-primary to-primary-strong text-primary-foreground bg-gradient-to-r',
