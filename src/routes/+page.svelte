@@ -15,14 +15,20 @@
 	import 'media-chrome';
 
 	let { data }: { data: PageData } = $props();
-
+	let count = $state(29);
 	const { locationsAndSpecializations } = data;
 
 	const form = superForm(data.form, {
 		validators: zodClient(formSchema),
 		multipleSubmits: 'prevent',
-		delayMs: 1000
+		delayMs: 1000,
+		onResult: ({ result }) => {
+			if (result.type === 'success') {
+				count++;
+			}
+		}
 	});
+
 	const isEnglish = getLocale() === 'en';
 	const VIDEO_URL = `https://yttvfraquuuxyupkjcbd.supabase.co/storage/v1/object/public/videos/${
 		isEnglish ? 'v3_english' : 'v3_french'
@@ -489,7 +495,7 @@
 											<span class="text-card-foreground/80 font-medium"
 												>{m['landing.urgency.progressLabel']()}</span
 											>
-											<span class="text-card-foreground font-bold">32/200</span>
+											<span class="text-card-foreground font-bold">{count}/200</span>
 										</div>
 										<div
 											class="bg-card-foreground/10 border-card-foreground/20 relative h-3 overflow-hidden rounded-full border shadow-inner"
