@@ -13,7 +13,7 @@
 	<meta name="author" content="JustiConnect" />
 	<script
 		defer
-		src="https://analytics.nariano.com/script.js"
+		src="https://analytics.justiconnect.com/script.js"
 		data-website-id="b23e9a45-1b43-48d7-b6e1-9b1d8bd25977"
 	></script>
 </svelte:head>
